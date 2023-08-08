@@ -1,0 +1,27 @@
+<div id="<%= dom_id social_post %>">
+  <p>
+    <strong>User:</strong>
+    <%= social_post.user.email %>
+  </p>
+  <p>
+    <strong>Title:</strong>
+    <%= social_post.title %>
+  </p>
+
+  <p>
+    <strong>Content:</strong>
+    <%= social_post.content %>
+  </p>
+  <% if social_post.image.attached? %>
+    <p>
+      <%= image_tag(social_post.image, style:"height: 100px; width: 100px;") %>
+    </p>
+  <% end%>
+  <p><%= social_post.hits %> views</p> 
+  <div> 
+    <% if current_user %>
+      <%= button_to "like", likes_path, params: {like: {social_post_id: social_post.id}}, method: :post %>
+      <%= social_post.likes.count %>
+    <% end %>
+  </div>
+</div>

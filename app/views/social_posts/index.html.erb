@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Social posts</h1>
+
+<div id="social_posts">
+  <% @social_posts.each do |social_post| %>
+    <%= render social_post %>
+    <p><%#= link_to "Show this social post", social_post %></p>
+    <div>
+      <% if current_user%>
+        <% if social_post.user_id == current_user.id%>
+          <%= link_to "Edit this social post", edit_social_post_path(social_post) %> |
+        <% end %>
+        <% if social_post.user_id == current_user.id%>
+          <%= button_to "Destroy this social post", social_post, method: :delete %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<% if current_user %>
+  <%= link_to "New social post", new_social_post_path %>
+<% end %>

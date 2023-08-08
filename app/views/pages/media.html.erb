@@ -1,0 +1,7 @@
+<h2><%= @message %> </h2>
+
+<% if current_user %>
+    <div>
+        <%= render @social_posts%>
+    </div>
+<% end %>
