@@ -1,7 +1,7 @@
 <div id="<%= dom_id social_post %>">
   <p>
     <strong>User:</strong>
-    <%= social_post.user.email %>
+    <%= link_to social_post.user.username, social_post.user %>
   </p>
   <p>
     <strong>Title:</strong>
@@ -17,11 +17,18 @@
       <%= image_tag(social_post.image, style:"height: 100px; width: 100px;") %>
     </p>
   <% end%>
-  <p><%= social_post.hits %> views</p> 
+  <p><%#= social_post.hits %></p> 
   <div> 
     <% if current_user %>
-      <%= button_to "like", likes_path, params: {like: {social_post_id: social_post.id}}, method: :post %>
-      <%= social_post.likes.count %>
+      <% if current_user != social_post.user %>
+        <% like = current_user.likes.find_by(social_post: social_post)%>
+        <% if like.nil? %>
+          <%= button_to "like", likes_path, params: {like: {social_post_id: social_post.id}}, method: :post %>
+        <% else %>
+          <%= button_to "Unlike", like_path(like), method: :delete %>
+        <% end %>
+      <% end %>
     <% end %>
+    <p><%= social_post.likes.count %> Likes</p>
   </div>
 </div>

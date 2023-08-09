@@ -1,6 +1,6 @@
 class SocialPostsController < ApplicationController
   before_action :set_social_post, only: %i[ show edit update destroy ]
-  
+  before_action :authenticate_user!, except: [:index, :show]
   # GET /social_posts or /social_posts.json
   def index
     @social_posts = SocialPost.all

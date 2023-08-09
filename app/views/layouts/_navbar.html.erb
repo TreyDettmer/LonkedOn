@@ -1,13 +1,25 @@
 
-
+<%= stylesheet_link_tag("navbar.css")%>
 <div class="navbar">
     <ul>
         <li><a href="/">Home</a></li>
-        <% if current_user %>
-        <li><a href="#"><%= link_to "My Media", pages_media_path %></a></li>
-        <li><%= button_to("Log Out", destroy_user_session_path, method: :delete) %></li>     
+        <li>
+            <%= form_with url: profiles_index_path, method: :get do |form| %>
+                <%= form.search_field :query, value: params[:query], placeholder: "Search"%>
+                <%= form.submit "Search"%>
+            <% end %>
+        </li>
+        <% if user_signed_in? %>
+            <li><a href="#"><%= link_to "View my profile", current_user %></a></li>
+            <% if current_user.admin? %>
+
+            <% end %>
+            <% if current_user.avatar.attached? %>
+                <li><%= image_tag(current_user.avatar, size: '50')%></li>
+            <% end %>
+            <li><%= button_to("Log Out", destroy_user_session_path, method: :delete) %></li>     
         <% else %>
-        <li><%= link_to "Sign up", new_user_registration_path %></a></li>
+            <li><%= link_to "Sign up", new_user_registration_path %></a></li>
         <% end %>
     </ul>
 </div>

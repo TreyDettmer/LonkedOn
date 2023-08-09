@@ -1,0 +1,9 @@
+<div>
+    <% @users.each do |user|%>
+        <%= render user%>
+    <% end %>
+</div>
+
+<% if !@users[0].present? %>
+  <h2>No Users Found</h2>
+<%end%>

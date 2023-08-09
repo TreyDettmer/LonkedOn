@@ -1,3 +1,20 @@
+GIT
+  remote: https://github.com/activerecord-hackery/ransack.git
+  revision: e13cf7b503d72e9645ee6ce623e10f3f2fd6ec9d
+  branch: main
+  specs:
+    ransack (4.0.0)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
+
+GIT
+  remote: https://github.com/nejdetkadir/followability.git
+  revision: 20819c924271bd74bcd5df845729c9a2906085f6
+  branch: main
+  specs:
+    followability (1.1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -235,11 +252,13 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9, >= 4.9.2)
+  followability!
   importmap-rails
   jbuilder
   puma (~> 5.0)
   punching_bag (~> 0.7.0)
   rails (~> 7.0.6)
+  ransack!
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)

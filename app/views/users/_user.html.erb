@@ -1,0 +1,6 @@
+<div>
+    <h2><%= link_to user.username, user%><h2>
+    <% if user.avatar.attached? %>
+        <%= image_tag(user.avatar, size: "50") %>
+    <% end %>
+</div>

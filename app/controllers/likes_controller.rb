@@ -10,6 +10,7 @@ class LikesController < ApplicationController
   def destroy
     @like = current_user.likes.find(params[:id])
     @like.destroy
+    redirect_back(fallback_location: root_path)
   end
 
   def like_params
