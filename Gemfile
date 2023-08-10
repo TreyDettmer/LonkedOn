@@ -18,6 +18,7 @@ gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'punching_bag', '~> 0.7.0'
 gem 'followability', github: 'nejdetkadir/followability', branch: 'main'
 gem 'ransack', :github => 'activerecord-hackery/ransack', :branch => 'main'
+gem 'trestle'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
