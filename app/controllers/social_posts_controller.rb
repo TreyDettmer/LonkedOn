@@ -1,9 +1,11 @@
 class SocialPostsController < ApplicationController
   before_action :set_social_post, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show]
+  include Pagy::Backend
   # GET /social_posts or /social_posts.json
   def index
-    @social_posts = SocialPost.all
+    @social_posts = SocialPost.order(:created_at => :asc)
+    @pagy, @social_posts = pagy_countless(@social_posts, items: 1)
   end
 
   # GET /social_posts/1 or /social_posts/1.json

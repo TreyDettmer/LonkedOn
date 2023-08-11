@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "follow_button" do %>
+    <% if this_user.following?(other_user) %>
+        <%= button_to "Unfollow", unfollow_path(other_user)%>
+    <% elsif this_user.sent_follow_request_to?(other_user) %>
+        <%= button_to "Cancel follow request", cancel_path(other_user) %>
+    <% else %>
+        <% if other_user.id == this_user.id %>
+        <% else %>
+            <%= button_to "Follow", follow_path(other_user)%>
+        <% end %>
+    <% end %>
+<% end %>

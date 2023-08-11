@@ -1,0 +1,19 @@
+<%= turbo_stream.append :social_posts do %>
+    <% @social_posts.each do |social_post| %>
+        <% if user_signed_in? %>
+            <% if current_user.following?(social_post.user) || current_user == social_post.user %>
+                <%= render social_post %>
+            <% end %>
+        <% end %>
+    <% end %>
+    <% if !user_signed_in? %>
+        <% @social_posts.each do |social_post| %>
+            <%= render social_post %>
+        <% end %>
+    <% end %>
+<% end %>
+<% if @pagy.next.present? %>
+    <%= turbo_stream.replace :pagination do %>
+        <%= turbo_frame_tag :pagination, loading: :lazy, src: social_posts_path(format: :turbo_stream, page: @pagy.next) %>
+    <% end %>
+<% end%>

@@ -4,13 +4,13 @@ class LikesController < ApplicationController
     if !@like.save
       flash[:alert] = "You already liked this"
     end
-    redirect_back(fallback_location: root_path)
+    redirect_to @like.social_post
   end
 
   def destroy
     @like = current_user.likes.find(params[:id])
     @like.destroy
-    redirect_back(fallback_location: root_path)
+    redirect_to @like.social_post
   end
 
   def like_params
