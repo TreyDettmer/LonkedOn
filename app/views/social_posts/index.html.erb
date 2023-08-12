@@ -1,11 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Social posts</h1>
-
-<% if current_user %>
-  <%= link_to "New social post", new_social_post_path %>
-<% end %>
-<%= turbo_frame_tag :results, data: { turbo_action: 'advance' } do %>
-  <div id="social_posts"><div>
-  <%= turbo_frame_tag :pagination, loading: :lazy, src: social_posts_path(format: :turbo_stream) %>
-<% end %>
+<div class=page-content>
+  <% if current_user %>
+    <%= render "form", social_post: SocialPost.new %>
+  <% end %>
+  <%= turbo_frame_tag :results, data: { turbo_action: 'advance' } do %>
+    <div id="social_posts" class="social_posts_container"></div>
+    <%= turbo_frame_tag :pagination, loading: :lazy, src: social_posts_path(format: :turbo_stream) %>
+  <% end %>
+</div>

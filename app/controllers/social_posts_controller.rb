@@ -28,9 +28,22 @@ class SocialPostsController < ApplicationController
 
     respond_to do |format|
       if @social_post.save
-        # format.html { redirect_to social_post_url(@social_post), notice: "Social post was successfully created." }
-        # format.json { render :show, status: :created, location: @social_post }
-        format.html { redirect_to action:"index"}
+
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(
+            "social_posts",
+            partial: "social_posts/social_post",
+            locals: {social_post: @social_post}
+          )
+        }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(
+            "#{helpers.dom_id(SocialPost.new)}_form",
+            partial: "social_posts/form",
+            locals: {social_post: SocialPost.new}
+          )
+        }
+        format.html { redirect_to social_posts_url, notice: "Post was successfully created!"}
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @social_post.errors, status: :unprocessable_entity }

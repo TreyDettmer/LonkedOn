@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "#{dom_id(social_post)}_like_button" do %>
+    <div class = "like_button">
+        <% like = this_user.likes.find_by(social_post: social_post)%>
+        <% if like.nil? %>
+            <%= button_to "like", likes_path, params: {like: {social_post_id: social_post.id}}, method: :post %>
+        <% else %>
+            <%= button_to "Unlike", like_path(like), method: :delete %>
+        <% end %>
+    </div>
+<% end %>

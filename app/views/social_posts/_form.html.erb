@@ -1,4 +1,4 @@
-<%= form_with(model: social_post) do |form| %>
+<%= form_with(model: social_post, id: "#{dom_id(social_post)}_form") do |form| %>
   <% if social_post.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(social_post.errors.count, "error") %> prohibited this social_post from being saved:</h2>
@@ -12,13 +12,8 @@
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
     <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, placeholder: "Start a post" %>
   </div>
 
   <div>

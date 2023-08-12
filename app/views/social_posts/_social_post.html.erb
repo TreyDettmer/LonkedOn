@@ -1,35 +1,32 @@
 
-<%= turbo_frame_tag dom_id(social_post), data: { turbo: 'false' } do %>
-  <p>
-    <strong>User:</strong>
-    <%= link_to(social_post.user.username, social_post.user)%>
-  </p>
-  <p>
-    <strong>Title:</strong>
-    <%= social_post.title %>
-  </p>
-
-  <p>
-    <strong>Content:</strong>
-    <%= social_post.content %>
-  </p>
-  <% if social_post.image.attached? %>
-    <p>
-      <%= image_tag(social_post.image, style:"height: 100px; width: 100px;") %>
-    </p>
-  <% end%>
-  <p><%#= social_post.hits %></p> 
-  <div> 
-    <% if current_user %>
-      <% if current_user != social_post.user %>
-        <% like = current_user.likes.find_by(social_post: social_post)%>
-        <% if like.nil? %>
-          <%= button_to "like", likes_path, params: {like: {social_post_id: social_post.id}}, method: :post %>
-        <% else %>
-          <%= button_to "Unlike", like_path(like), method: :delete %>
+<%= turbo_frame_tag dom_id(social_post) do %>
+  <div class="social_post">
+    <div class="header">
+      <% if social_post.image.attached? %>
+        <%= image_tag(social_post.image) %>   
+      <% end%>
+      <p>
+        <strong>User:</strong>
+        <%= link_to(social_post.user.username, social_post.user)%>
+      </p>
+    </div>
+    <div class="content">
+      <p><%= social_post.content %></p>
+      <% if social_post.image.attached? %>
+        <%= image_tag(social_post.image) %>
+      <% end%>
+    </div>
+    <div class="data-footer">
+      <p><%= social_post.likes.count %> Likes</p>
+    </div>
+    <p><%#= social_post.hits %></p> 
+    <div class="actions-footer"> 
+      <% if current_user %>
+        <% if current_user != social_post.user %>
+          <%= render "like_button", this_user: current_user, social_post: social_post %>
         <% end %>
       <% end %>
-    <% end %>
-    <p><%= social_post.likes.count %> Likes</p>
+      
+    </div>
   </div>
 <% end %>
