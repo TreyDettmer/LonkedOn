@@ -1,12 +1,27 @@
+<%= stylesheet_link_tag "social-posts", "data-turbo-track": "reload" %>
 <p style="color: green"><%= notice %></p>
-
-<h1>Social posts</h1>
+<%= turbo_frame_tag "modal" %>
 <div class=page-content>
-  <% if current_user %>
-    <%= render "form", social_post: SocialPost.new %>
-  <% end %>
+
   <%= turbo_frame_tag :results, data: { turbo_action: 'advance' } do %>
-    <div id="social_posts" class="social_posts_container"></div>
+    <div id="social_posts" class="social_posts_container">
+      <% if current_user %>
+        <div class="new-post-bar">
+          <%= turbo_frame_tag "#{dom_id(current_user)}", data: { turbo: 'false' }, class:"image" do %>
+            <%= link_to(current_user, class:"image")  do %>
+              <% if current_user.avatar.attached? %>
+                <%= image_tag(current_user.avatar) %>
+              <% else %>
+                <%= image_tag("missing-avatar.png") %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <%= link_to(new_social_post_path, data: {turbo_frame: "modal" }, class:"prompt-container")  do %>
+            <p>Start a post</p>
+          <% end%>
+        </div>
+      <% end %>
+    </div>
     <%= turbo_frame_tag :pagination, loading: :lazy, src: social_posts_path(format: :turbo_stream) %>
   <% end %>
 </div>

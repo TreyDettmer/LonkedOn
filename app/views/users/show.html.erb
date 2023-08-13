@@ -1,12 +1,24 @@
-<h2> <%= @user.username %> </h2>
-<%= @user.email %>
-<p><%= @user.bio %></p>
+<%= stylesheet_link_tag "user-profile", "data-turbo-track": "reload" %>
+<div class=page-content>
+    <div class="header-section panel">
+        <% if @user.avatar.attached? %>
+            <div class="background"><%= image_tag(@user.avatar) %></div>
+        <% else %>
+            <div class="background"><%= image_tag("missing-avatar.png") %></div>
+        <% end %>
+        <div class="info">
+            <p class="username"> <%= @user.username %> </p>
+            <p class="headline"> <%= @user.headline %> </p>
+            <p class="location"> <%= @user.headline %> </p>
 
-<% if @user.avatar.attached? %>
-    <div><%= image_tag(@user.avatar, size: "50") %></div>
-<% end %>
-<p><%= @user.followers.count %> Followers </p>
-<p><%= @user.following.count %> Following </p>
-<% if current_user %>
-    <%= render "follow_button", this_user: current_user, other_user: @user %>
-<% end%>
+            <p class="following"><%= @user.following.count %> Following </p>
+            <% if current_user %>
+                <%= render "follow_button", this_user: current_user, other_user: @user %>
+            <% end%>
+        </div>
+        <%= image_tag("missing-avatar.png",class:"profile-pic") %></div>
+    </div>
+    <div class="about-section panel">
+        <p class="section-title">About</p>
+    </div>
+</div>

@@ -1,15 +1,23 @@
 
 <%= turbo_frame_tag dom_id(social_post) do %>
   <div class="social_post">
-    <div class="header">
-      <% if social_post.image.attached? %>
-        <%= image_tag(social_post.image) %>   
-      <% end%>
-      <p>
-        <strong>User:</strong>
-        <%= link_to(social_post.user.username, social_post.user)%>
-      </p>
-    </div>
+    <%= turbo_frame_tag "#{dom_id(social_post)}_user", data: { turbo: 'false' } do %>
+      <%= link_to social_post.user do %>
+        <div class="header">
+            <% if social_post.user.avatar.attached? %>
+              <%= image_tag(user.avatar) %>
+            <% else %>
+              <%= image_tag("missing-avatar.png") %>
+            <% end %>
+            <div class="info">
+              <p class="username"><%= social_post.user.username %> </p>
+              <p class="location"><%= social_post.user.username %> </p>
+              <p class="creation-date"><%= time_ago_in_words(social_post.created_at.to_time)%> </p>
+            </div>
+            
+        </div>
+      <% end %>
+    <% end %>
     <div class="content">
       <p><%= social_post.content %></p>
       <% if social_post.image.attached? %>

@@ -2,9 +2,10 @@
     <div class = "like_button">
         <% like = this_user.likes.find_by(social_post: social_post)%>
         <% if like.nil? %>
-            <%= button_to "like", likes_path, params: {like: {social_post_id: social_post.id}}, method: :post %>
+        <%# fa_icon("thumbs-up 2x", type: :light) %>
+            <%= button_to icon('fa-regular', 'thumbs-up',class:"fa-2x") + " Like", likes_path, params: {like: {social_post_id: social_post.id}}, method: :post %>
         <% else %>
-            <%= button_to "Unlike", like_path(like), method: :delete %>
+            <%= button_to icon('fa-solid', 'thumbs-up',class:"fa-2x") + " Like", like_path(like), class: "unlike", method: :delete %>
         <% end %>
     </div>
 <% end %>

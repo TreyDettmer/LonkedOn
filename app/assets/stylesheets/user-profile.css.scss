@@ -1,0 +1,108 @@
+@import "global-styles";
+
+.panel {
+    background-color: $primary-color;
+    position: relative;
+    border-radius: $panel-border-radius;
+}
+
+.header-section {
+    width: 750px;
+    height: 500px;
+    color: $white-font-color;
+    margin: 25px auto 0px auto;
+    background-color: $primary-color;
+    
+    position: relative;
+    .background {
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+        background-color: $primary-color;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: $panel-border-radius $panel-border-radius 0px 0px;
+        }
+    }
+
+    .info {
+        width: 100%;
+        height: 270px;
+        background-color: $primary-color;
+        padding: 70px $horizontal-padding-value 0px $horizontal-padding-value;
+        border-radius: inherit;
+        position: relative;
+        .username {
+            font-size: $h1-font-size;
+            font-weight: $bold-font-weight;
+            display: block;
+            padding-bottom: 5px;
+        }
+
+        .headline {
+            font-size: $body-font-size;
+            display: block;
+        }
+
+        .location {
+            font-size: $body-font-size;
+            color: $gray-font-color;
+            display: block;
+        }
+
+        .following {
+            color: $gray-font-color;
+            font-size: $meta-data-font-size;
+            display: block;
+            padding: 10px 0px;
+        }
+
+        #follow_button {
+            position: absolute;
+            bottom: $horizontal-padding-value;
+            left: $horizontal-padding-value;
+        }
+
+        button {
+            background-color: $tertiary-color;
+            padding: 10px;
+            border: none;
+            margin: 5px auto;
+            border-radius: 20px;
+            font-size: $body-font-size;
+            font-weight: $bold-font-weight;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: $tertiary-highlight-color;
+        }
+    }
+
+    .profile-pic {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: $horizontal-padding-value;
+        transform: translate(0%, -70%);
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: solid 5px $dark-gray-font-color;
+    }
+}
+
+.section-title {
+    font-size: $base-font-size;
+    font-weight: $bold-font-weight;
+    color: $white-font-color;
+    padding:  0px;
+}
+
+.about-section {
+    width: 750px;
+    height: 200px;
+    margin: 5px auto;
+    padding: $horizontal-padding-value;
+}

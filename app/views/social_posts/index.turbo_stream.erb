@@ -4,13 +4,11 @@
             <% if current_user.following?(social_post.user) || current_user == social_post.user %>
                 <%= render social_post %>
             <% end %>
-        <% end %>
-    <% end %>
-    <% if !user_signed_in? %>
-        <% @social_posts.each do |social_post| %>
+        <% else %>
             <%= render social_post %>
         <% end %>
     <% end %>
+
 <% end %>
 <% if @pagy.next.present? %>
     <%= turbo_stream.replace :pagination do %>

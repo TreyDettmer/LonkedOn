@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user
   def show
     @user = User.find(params[:id])
+    puts "hello"
   end
 
   def follow

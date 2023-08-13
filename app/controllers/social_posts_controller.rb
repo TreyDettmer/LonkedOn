@@ -1,7 +1,22 @@
 class SocialPostsController < ApplicationController
   before_action :set_social_post, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show]
+  helper_method :time_since_creation
   include Pagy::Backend
+
+
+  def time_since_creation(this_post)
+    time_in_minutes = ((Date.today.to_time - this_post.created_at.to_time) / 60.0)
+    if time_in_minutes >= 60
+      time_in_hours = time_in_minutes / 60.0
+      if time_in_hours >= 24
+        time_in_days = time_in_hours / 24.0
+        return time_in_days.round().to_s() + " days"
+      end
+      return time_in_hours.round().to_s() + " hrs"
+    end
+    return time_in_minutes.round().to_s() + " min"
+  end
   # GET /social_posts or /social_posts.json
   def index
     @social_posts = SocialPost.order(:created_at => :asc)
@@ -77,6 +92,7 @@ class SocialPostsController < ApplicationController
       end
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

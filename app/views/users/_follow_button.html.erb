@@ -6,7 +6,7 @@
     <% else %>
         <% if other_user.id == this_user.id %>
         <% else %>
-            <%= button_to "Follow", follow_path(other_user)%>
+            <%= button_to "Follow", follow_path(other_user) %>
         <% end %>
     <% end %>
 <% end %>
