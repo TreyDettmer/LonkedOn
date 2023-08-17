@@ -5,6 +5,33 @@
     position: relative;
     border-radius: $panel-border-radius;
 }
+.page-content {
+    position: relative;
+}
+
+.edit-button {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 0px;
+    right: $horizontal-padding-value;
+
+    .icon-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: relative;
+        i {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+    }
+    .icon-container:hover {
+        background-color: $dark-gray-font-color;
+    }
+}
 
 .header-section {
     width: 750px;
@@ -12,13 +39,14 @@
     color: $white-font-color;
     margin: 25px auto 0px auto;
     background-color: $primary-color;
-    
+    border-radius: $panel-border-radius $panel-border-radius 0px 0px;
     position: relative;
     .background {
         width: 100%;
         height: 230px;
         object-fit: cover;
         background-color: $primary-color;
+        border-radius: $panel-border-radius $panel-border-radius 0px 0px;
         img {
             width: 100%;
             height: 100%;
@@ -91,6 +119,59 @@
         height: 150px;
         border-radius: 50%;
         border: solid 5px $dark-gray-font-color;
+    }
+}
+
+.edit-form {
+    background-color: $primary-color;
+    position: relative;
+    border-radius: $panel-border-radius;
+    width: 750px;
+    color: $white-font-color;
+    margin: 25px auto 0px auto;
+    padding: $horizontal-padding-value;
+
+    .avatar-container {
+        img {
+            width: 100px;
+        }
+    }
+
+    label {
+        display: block;
+        color: $gray-font-color;
+        font-family: $body-font-family;
+        font-size: $body-font-size;
+    }
+
+    .text-input {
+        color: $white-font-color;
+        font-family: $body-font-family;
+        background-color: $primary-color;
+        border-radius: 5px;
+        border: 1px solid $gray-font-color;
+        padding: 5px;
+    }
+    .submit-container
+    {
+        padding-top: $horizontal-padding-value;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .submit-button {
+        background-color: $tertiary-color;
+        padding: 10px;
+        border: none;
+        margin: 0px;
+        border-radius: 20px;
+        font-size: $body-font-size;
+        font-weight: $bold-font-weight;
+        color: $dark-gray-font-color;
+        cursor: pointer;
+
+    }
+    .submit-button:hover {
+        background-color: $tertiary-highlight-color;
     }
 }
 

@@ -5,13 +5,13 @@
       <%= link_to social_post.user do %>
         <div class="header">
             <% if social_post.user.avatar.attached? %>
-              <%= image_tag(user.avatar) %>
+              <%= image_tag(social_post.user.avatar) %>
             <% else %>
               <%= image_tag("missing-avatar.png") %>
             <% end %>
             <div class="info">
               <p class="username"><%= social_post.user.username %> </p>
-              <p class="location"><%= social_post.user.username %> </p>
+              <p class="headline"><%= social_post.user.headline %> </p>
               <p class="creation-date"><%= time_ago_in_words(social_post.created_at.to_time)%></p>
             </div>
             

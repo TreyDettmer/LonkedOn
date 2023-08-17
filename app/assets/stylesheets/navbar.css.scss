@@ -29,6 +29,40 @@
     height: 100%;
     display: flex;
     align-items: center;
+    .signup-link {
+      height: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $tertiary-color;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: $body-font-size;
+      font-weight: $bold-font-weight;
+      cursor: pointer;
+    }
+    .signup-link:hover {
+      background-color: $tertiary-highlight-color;
+    }
+    .button_to {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .logout-button {
+        background-color: $warning-color;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: $body-font-size;
+        font-weight: $bold-font-weight;
+        cursor: pointer;
+      }
+      .logout-button:hover {
+        background-color: $warning-highlight-color;
+      }
+    }
     a {
       color: white;
       height: 100%;
@@ -75,6 +109,16 @@
         color: $gray-font-color;
       }
     }
+  }
+  .special-li {
+    position: absolute;
+    right: $horizontal-padding-value;
+  }
+  .red {
+    background-color: $warning-color;
+  }
+  .green {
+    background-color: $tertiary-color;
   }
   .search-bar {
 
