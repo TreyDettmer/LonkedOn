@@ -1,0 +1,33 @@
+<%= form_with(model: company) do |form| %>
+  <% if current_user && current_user.admin?%>
+    <% if company.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+        <ul>
+          <% company.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :title, style: "display: block" %>
+      <%= form.text_field :title, style:"color: black" %>
+    </div>
+    <div>
+      <%= form.label :location, style: "display: block" %>
+      <%= form.text_field :location, style:"color: black" %>
+    </div>
+
+    <div>
+      <%= form.label :image, style: "display: block" %>
+      <%= form.file_field :image %>
+    </div>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <div style="color: black">
+      <%= form.submit %>
+    </div>
+  <% end %>
+<% end %>

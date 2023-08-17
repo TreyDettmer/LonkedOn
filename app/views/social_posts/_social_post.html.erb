@@ -12,7 +12,7 @@
             <div class="info">
               <p class="username"><%= social_post.user.username %> </p>
               <p class="location"><%= social_post.user.username %> </p>
-              <p class="creation-date"><%= time_ago_in_words(social_post.created_at.to_time)%> </p>
+              <p class="creation-date"><%= time_ago_in_words(social_post.created_at.to_time)%></p>
             </div>
             
         </div>
@@ -26,15 +26,18 @@
     </div>
     <div class="data-footer">
       <p><%= social_post.likes.count %> Likes</p>
+      <%= link_to "#{social_post.comments.count} comments", show_comments_social_post_path(social_post), data: {turbo_frame: "#{dom_id(social_post)}_comments_frame", action: "replace",turbo_method: :get}, class:"comments-count" %>
     </div>
     <p><%#= social_post.hits %></p> 
     <div class="actions-footer"> 
       <% if current_user %>
         <% if current_user != social_post.user %>
           <%= render "like_button", this_user: current_user, social_post: social_post %>
+          <%= render "comment_button", social_post: social_post %>
         <% end %>
       <% end %>
-      
     </div>
+    <%= turbo_frame_tag "#{dom_id(social_post)}_comment_frame"%>
+    <%= turbo_frame_tag "#{dom_id(social_post)}_comments_frame"%>
   </div>
 <% end %>

@@ -20,7 +20,35 @@ class SocialPostsController < ApplicationController
   # GET /social_posts or /social_posts.json
   def index
     @social_posts = SocialPost.order(:created_at => :asc)
-    @pagy, @social_posts = pagy_countless(@social_posts, items: 1)
+    @pagy, @social_posts = pagy_countless(@social_posts, items: 3)
+  end
+
+  def start_a_comment
+    @social_post = SocialPost.find(params[:id])
+    @comment = @social_post.comments.build
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace(
+          "#{helpers.dom_id(@social_post)}_comment_frame",
+          partial: "comments/form",
+          locals: {social_post: @social_post, comment: @comment,user: current_user}
+        )
+      }
+      format.html { redirect_to social_posts_url, notice: "Social post comment started unsuccessfully" }
+    end
+  end
+  def show_comments
+    @social_post = SocialPost.find(params[:id])
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace(
+          "#{helpers.dom_id(@social_post)}_comments_frame",
+          partial: "social_posts/comments_feed",
+          locals: {social_post: @social_post}
+        )
+      }
+      format.html { redirect_to social_posts_url, notice: "Social post showing comments started unsuccessfully" }
+    end
   end
 
   # GET /social_posts/1 or /social_posts/1.json

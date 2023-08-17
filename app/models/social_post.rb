@@ -4,6 +4,7 @@ class SocialPost < ApplicationRecord
     acts_as_punchable
 
     has_many :likes, dependent: :destroy
+    has_many :comments, dependent: :destroy
 
     before_create :randomize_id
 

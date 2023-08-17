@@ -1,0 +1,6 @@
+
+<%= turbo_frame_tag "#{dom_id(social_post)}_comment_button", class:"action-button-container" do %>
+    <% link_to start_a_comment_social_post_path(social_post), data: {turbo_frame: "#{dom_id(social_post)}_comment_frame", action: "replace",turbo_method: :get}, class: "comment-button" do%>
+        <p><i class="fa-regular fa-comment fa-xl"></i> Comment</p>
+    <% end %>
+<% end %>

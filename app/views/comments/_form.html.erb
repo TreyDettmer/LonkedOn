@@ -1,0 +1,34 @@
+<%= stylesheet_link_tag "social-posts", "data-turbo-track": "reload" %>
+<%= turbo_frame_tag "#{dom_id(social_post)}_comment_frame" do %>
+  <%= form_with(model: comment) do |form| %>
+    <% if comment.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+        <ul>
+          <% comment.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+    <div class="new-comment">
+      <% if social_post.user.avatar.attached? %>
+        <%= image_tag("missing-avatar.png") %>
+      <% else %>
+        <%= image_tag("missing-avatar.png") %>
+      <% end %>
+      <%= form.text_field :text, placeholder:"Start a comment" %>
+    </div>
+
+    <div>
+      <%= form.text_field :user_id, type:"hidden", value:current_user.id %>
+    </div>
+
+    <div>
+      <%= form.text_field :social_post_id, type:"hidden", value:social_post.id %>
+    </div>
+  <% end %>
+<% end %>

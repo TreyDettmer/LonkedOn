@@ -2,21 +2,44 @@
 <%= stylesheet_link_tag "navbar", "data-turbo-track": "reload" %>
 <div class="navbar">
     <ul>
-        <li><a href="/">Home</a></li>
         <li>
-            <%= form_with url: profiles_index_path, method: :get do |form| %>
-                <%= form.search_field :query, value: params[:query], placeholder: "Search"%>
-                <%= form.submit "Search"%>
+            <%= link_to social_posts_path do %>
+                <i class="fa-brands fa-linkedin fa-2xl"></i>
+            <%end%>
+        </li>
+        <li class="search-bar">
+            <%= form_with url: profiles_index_path, class:"search-form", method: :get do |form| %>
+                <i class="fa-solid fa-magnifying-glass fa-sm icon"></i>
+                <%= form.search_field :query, value: params[:query], placeholder: "Search people"%>
             <% end %>
         </li>
+        <li>
+            <%= link_to social_posts_path do %>
+                <i class="fa-solid fa-house fa-lg icon"></i>
+                <p>Home</p>
+            <%end%>
+        </li>
+        <li>
+            <%= link_to job_posts_path do %>
+                <i class="fa-solid fa-briefcase fa-lg icon"></i>
+                <p>Jobs</p>
+            <%end%>
+        </li>
         <% if user_signed_in? %>
-            <li><a href="#"><%= link_to "View my profile", current_user %></a></li>
             <% if current_user.admin? %>
 
             <% end %>
-            <% if current_user.avatar.attached? %>
-                <li><%= image_tag(current_user.avatar, size: '50')%></li>
-            <% end %>
+            <li>
+                <%= link_to current_user do %>
+                    <% if current_user.avatar.attached? %>
+                        <%= image_tag(current_user.avatar)%>
+                    <% else %>
+                        <%= image_tag("missing-avatar.png")%>
+                    <% end %>
+                    <p>Me</p>
+                <%end%>
+            </li>
+
             <li><%= button_to("Log Out", destroy_user_session_path, method: :delete) %></li>     
         <% else %>
             <li><%= link_to "Sign up", new_user_registration_path %></a></li>

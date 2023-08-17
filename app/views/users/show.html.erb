@@ -11,7 +11,9 @@
             <p class="headline"> <%= @user.headline %> </p>
             <p class="location"> <%= @user.headline %> </p>
 
+            <p class="following"><%= @user.followers.count %> Followers </p>
             <p class="following"><%= @user.following.count %> Following </p>
+            
             <% if current_user %>
                 <%= render "follow_button", this_user: current_user, other_user: @user %>
             <% end%>

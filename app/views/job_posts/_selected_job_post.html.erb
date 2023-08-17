@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "selected-job-container" do %>
+    <% if job_post != nil%>
+        <div class="selected-job-container">
+        <p class="title"><%=job_post.title%></p>
+        <p class=company-and-location><%=job_post.company.title%> &#x2022; <%=job_post.location%></p>
+        <div class="about-section">
+            <p class="section-header">About the job</p>
+            <p class="section-content"><%=job_post.description%></p>
+        </div>
+        </div>
+    <% end %>
+<% end %>

@@ -1,0 +1,21 @@
+<%= turbo_frame_tag "#{dom_id(social_post)}_comments_frame" do %>
+    <% social_post.comments.each_with_index do |comment, index| %>
+        <%= turbo_frame_tag "#{dom_id(social_post)}_comments_frame_comment_#{index}", data: { turbo: 'false' }, class:"comment" do %>
+            <% commenter = User.find(comment.user_id)%>
+            <%= link_to commenter, class:"image-container" do %>
+                <% if commenter.avatar.attached? %>
+                    <%= image_tag(user.avatar) %>
+                <% else %>
+                    <%= image_tag("missing-avatar.png") %>
+                <% end %>
+            <% end %>
+            <div class="container">
+                <%= link_to commenter, class:"header" do %>
+                    <p class="username"><%= commenter.username %> </p>
+                    <p class="location"><%= commenter.username %> </p>
+                <%end%>
+                <p class="body"><%= comment.text %></p>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>

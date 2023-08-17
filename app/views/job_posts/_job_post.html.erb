@@ -1,0 +1,18 @@
+<%= turbo_frame_tag dom_id(job_post) do %>
+  <% link_to change_selected_job_post_path(job_post), data: {turbo_frame: "selected-job-container", action: "replace",turbo_method: :get}do%>
+    <div class="job_post">
+      <% if job_post.company.image.attached? %>
+        <%= image_tag(job_post.company.image) %>
+      <% else%>
+        <%= image_tag("missing-avatar.png") %>
+      <% end %>
+      
+      <div class="content">
+        <p class="title"><%= job_post.title %></p>
+        <p class="company"><%= job_post.company.title %></p>
+        <p class="location"><%= job_post.location %></p>
+        <p class="creation-date"><%= time_ago_in_words(job_post.created_at.to_time)%></p>
+      </div>  
+    </div>
+  <% end %>
+<% end %>

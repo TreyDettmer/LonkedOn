@@ -9,3 +9,4 @@
 //= link navbar.css
 //= link user-profile.css
 //= link social-posts.css
+//= link job-posts.css

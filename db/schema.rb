@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_12_223720) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_15_202902) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_223720) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "text"
+    t.string "user_id"
+    t.string "social_post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "title"
+    t.string "location", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "followability_relationships", force: :cascade do |t|
     t.string "followerable_type", null: false
     t.integer "followerable_id", null: false
@@ -49,6 +64,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_223720) do
     t.datetime "updated_at", null: false
     t.index ["followable_type", "followable_id"], name: "index_followability_relationships_on_followable"
     t.index ["followerable_type", "followerable_id"], name: "index_followability_relationships_on_followerable"
+  end
+
+  create_table "job_posts", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "company_id"
+    t.index ["company_id"], name: "index_job_posts_on_company_id"
   end
 
   create_table "likes", force: :cascade do |t|

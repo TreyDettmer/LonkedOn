@@ -7,6 +7,7 @@ class User < ApplicationRecord
          has_many :social_posts, dependent: :destroy
          has_one_attached :avatar
          has_many :likes, dependent: :destroy
+         has_many :comments, dependent: :destroy
   def self.ransackable_attributes(auth_object = nil)
     ["bio", "username"]
   end

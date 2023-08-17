@@ -1,22 +1,17 @@
 /* // Entry point for your Sass build */
 @import "font-awesome";
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700');
-*,
-*::before,
-*::after 
-{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 $primary-color: #1d2226;
 $secondary-color: black;
 $tertiary-color: #70b5f9;
 $tertiary-highlight-color: #89c4ff;
+$quaternary-color: #38434f;
 $body-font-family: 'Open Sans', sans-serif;
 $white-font-color: #ffffff;
 $gray-font-color: #96999b;
+$comment-background-color: #3c4345;
+$light-gray-font-color:#eaeef0;
 $dark-gray-font-color: #3a3a3a;
 $horizontal-padding-value: 20px;
 $h1-font-size:24px;
@@ -26,6 +21,17 @@ $meta-data-font-size:12px;
 $base-font-weight: 400;
 $bold-font-weight: 600;
 $panel-border-radius: 10px;
+*,
+*::before,
+*::after 
+{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: $white-font-color;
+}
+
+
 
 body
 {

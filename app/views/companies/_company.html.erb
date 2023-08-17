@@ -1,0 +1,7 @@
+<div id="<%= dom_id company %>">
+    <p> <%= company.title %> </p>
+    <p> <%= company.location %> </p>
+    <% if company.image.attached?%>
+        <%= image_tag(company.image,size: '50') %>
+    <% end %>
+</div>

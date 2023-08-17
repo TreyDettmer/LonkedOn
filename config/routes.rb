@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :comments
+  resources :companies
+  
   get 'profiles/index'
   resources :likes, only: [:create, :destroy]
   get 'pages/media'
@@ -14,7 +17,13 @@ Rails.application.routes.draw do
   post 'users/:id/decline', to: "users#decline", as: "decline"
   post 'users/:id/cancel', to: "users#cancel", as: "cancel"
 
-  resources :social_posts
+  resources :social_posts do 
+    get 'start_a_comment', on: :member, defaults: { format: :turbo_stream }
+    get 'show_comments', on: :member, defaults: { format: :turbo_stream }
+  end
+  resources :job_posts do 
+    get 'change_selected', on: :member, defaults: { format: :turbo_stream }
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'pages/media'
   # Defines the root path route ("/")

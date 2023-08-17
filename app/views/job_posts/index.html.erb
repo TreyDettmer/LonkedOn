@@ -1,0 +1,11 @@
+<%= stylesheet_link_tag "job-posts", "data-turbo-track": "reload" %>
+<p style="color: green"><%= notice %></p>
+<h1>Job posts</h1>
+<%= link_to "New job post", new_job_post_path %>
+<div class=page-content>
+  <%= turbo_frame_tag :results, data: {turbo_action: 'advance' } do %>
+    <div id="job_posts" class="job_posts_container"></div>
+    <%= turbo_frame_tag :pagination, loading: :lazy, src: job_posts_path(format: :turbo_stream) %>
+  <% end %>
+  <%= render "selected_job_post", job_post: nil%>
+</div>
