@@ -1,10 +1,10 @@
 
 <%= stylesheet_link_tag "navbar", "data-turbo-track": "reload" %>
-<div class="navbar">
+<%= turbo_frame_tag "navbar", data: { turbo: 'false' }, class:"navbar" do %>
     <ul>
         <li>
             <%= link_to social_posts_path do %>
-                <i class="fa-brands fa-linkedin fa-2xl"></i>
+                <%= image_tag("LonkedOn-logo.png", class:"main")%>
             <%end%>
         </li>
         <li class="search-bar">
@@ -14,13 +14,13 @@
             <% end %>
         </li>
         <li>
-            <%= link_to social_posts_path do %>
-                <i class="fa-solid fa-house fa-lg icon"></i>
+            <%= link_to social_posts_path,class:"#{is_active('social_posts')}"  do %>
+                <i class= 'fa-solid fa-house fa-lg icon'></i>
                 <p>Home</p>
             <%end%>
         </li>
         <li>
-            <%= link_to job_posts_path do %>
+            <%= link_to job_posts_path,class:"#{is_active('job_posts')}" do %>
                 <i class="fa-solid fa-briefcase fa-lg icon"></i>
                 <p>Jobs</p>
             <%end%>
@@ -30,7 +30,7 @@
 
             <% end %>
             <li>
-                <%= link_to current_user do %>
+                <%= link_to current_user,class:"#{is_active('users/'+current_user.id.to_s)}" do %>
                     <% if current_user.avatar.attached? %>
                         <%= image_tag(current_user.avatar)%>
                     <% else %>
@@ -42,7 +42,7 @@
 
             <li class="special-li"><%= button_to("Log Out", destroy_user_session_path, class:"logout-button", method: :delete) %></li>     
         <% else %>
-            <li class="special-li"><%= link_to "Sign up", new_user_registration_path, class:"signup-link" %></li>
+            <li class="special-li"><%= link_to "Sign up or Log In", new_user_registration_path, class:"signup-link" %></li>
         <% end %>
     </ul>
-</div>
+<%end%>

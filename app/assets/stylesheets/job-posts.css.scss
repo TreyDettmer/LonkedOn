@@ -1,6 +1,8 @@
 @import "global-styles";
 
-
+  * {
+    text-decoration: none;
+  }
 
  .form {
   background-color: $primary-color;
@@ -47,17 +49,17 @@
     flex-direction: column;
     color: #ffffff;
     position: relative;
-    
     height: 150px;
     display: flex;
     flex-direction: row;
+    
 
     a,
     a:link,
     a:visited,
     a:hover,
     a:active{
-        text-decoration: none;
+        text-decoration: none !important;
     }
 
     img {
@@ -89,7 +91,7 @@
         color: rgb(88, 167, 88);
         font-size: $meta-data-font-size;
         font-weight: $base-font-weight;
-        text-decoration: none;
+        
         margin-top: auto;
       }
     }
@@ -111,21 +113,21 @@
         color: $white-font-color;
         font-weight: $bold-font-weight;
         font-size: $body-font-size;
-        text-decoration: none;
+        
       }
 
       .location {
         color: $gray-font-color;
         font-size: $meta-data-font-size;
         font-weight: $base-font-weight;
-        text-decoration: none;
+        
       }
 
       .creation-date {
         color: $gray-font-color;
         font-size: $meta-data-font-size;
         font-weight: $base-font-weight;
-        text-decoration: none;
+        
       }
 
       img{
@@ -217,28 +219,62 @@
     margin: 35px auto 0px auto;
     position: relative;
     padding: 15px $horizontal-padding-value 0px $horizontal-padding-value;
-
+    
     .title {
       font-size: $h1-font-size;
       font-weight: $bold-font-weight;
       padding: 5px 0px;
+      
+    }
+
+    .info-container {
+      display: flex;
+      gap: 5px;
     }
 
     .company-and-location {
       font-size: $body-font-size;
-      
+      padding: 0px 0px 15px 0px;
+    }
+    .creation-date-and-applicant-count {
+      font-size: $body-font-size;
+      padding: 0px 0px 15px 5px;
+      color: $gray-font-color;
+    }
+    .apply-button {
+      background-color: $tertiary-color;
+      padding: 10px;
+      border: none;
+      margin: 0px;
+      border-radius: 20px;
+      font-size: $body-font-size;
+      font-weight: $bold-font-weight;
+      color: $dark-gray-font-color;
+      cursor: pointer;
+
+    }
+    .apply-button:hover {
+        background-color: $tertiary-highlight-color;
     }
 
     .about-section {
-    
+      padding: 15px $horizontal-padding-value 5px $horizontal-padding-value;
+      h2 {
+        font-size: $base-font-size;
+        padding: 5px 0px;
+      }
+      p, ul li {
+        font-size: $body-font-size;
+        padding: 0px 0px $horizontal-padding-value 0px;
+      }
+      ul {
+        padding-left: $horizontal-padding-value;
+        padding-bottom: $horizontal-padding-value;
+      }
 
       .section-header {
         font-size: $base-font-size;
         font-weight: $bold-font-weight;
-        padding: 15px 0px 5px 0px;
-      }
-      .section-content {
-        font-size: $body-font-size;
       }
     }
  }
@@ -259,7 +295,7 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      text-decoration: none;
+      
     }
 
     .cancel-button:hover {

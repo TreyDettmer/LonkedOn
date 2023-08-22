@@ -1,15 +1,29 @@
 Rails.application.routes.draw do
+
+  resources :education_experiences do
+    get 'modify_education_experience', on: :member, defaults: { format: :turbo_stream }
+  end
+
+  resources :work_experiences do 
+    get 'modify_work_experience', on: :member, defaults: { format: :turbo_stream }
+  end
   resources :comments
   resources :companies
   
   get 'profiles/index'
   resources :likes, only: [:create, :destroy]
+  resources :applications, only: [:create, :destroy]
   get 'pages/media'
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
 
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do 
+    get 'build_a_new_work_experience', on: :member, defaults: { format: :turbo_stream }
+    get 'update_about_section', on: :member, defaults: { format: :turbo_stream }
+    get 'build_a_new_education_experience', on: :member, defaults: { format: :turbo_stream }
+    get 'update_user_profile', on: :member, defaults: { format: :turbo_stream }
+  end
   
   post 'users/:id/follow', to: "users#follow", as: "follow"
   post 'users/:id/unfollow', to: "users#unfollow", as: "unfollow"
@@ -17,9 +31,14 @@ Rails.application.routes.draw do
   post 'users/:id/decline', to: "users#decline", as: "decline"
   post 'users/:id/cancel', to: "users#cancel", as: "cancel"
 
+  get '/404', to: 'errors#not_found'
+  get '/500', to: 'errors#internal_server'
+  get '/422', to: 'errors#unprocessable'
+
   resources :social_posts do 
     get 'start_a_comment', on: :member, defaults: { format: :turbo_stream }
     get 'show_comments', on: :member, defaults: { format: :turbo_stream }
+    get 'build_a_new_social_post', on: :member, defaults: { format: :turbo_stream }
   end
   resources :job_posts do 
     get 'change_selected', on: :member, defaults: { format: :turbo_stream }

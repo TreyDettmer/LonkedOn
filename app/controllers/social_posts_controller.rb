@@ -53,65 +53,101 @@ class SocialPostsController < ApplicationController
 
   # GET /social_posts/1 or /social_posts/1.json
   def show
-    @social_post.punch(request)
+    if current_user
+      @social_post.punch(request)
+    else
+      return respond_to do |format|
+        format.html { redirect_to social_posts_url}
+      end
+    end
   end
 
   # GET /social_posts/new
   def new
-    @social_post = SocialPost.new
+    if current_user
+      @social_post = SocialPost.new
+    else
+      return respond_to do |format|
+        format.html { redirect_to social_posts_url}
+      end
+    end
   end
 
   # GET /social_posts/1/edit
   def edit
+    return respond_to do |format|
+      format.html { redirect_to social_posts_url}
+    end
+  end
+
+  def build_a_new_social_post
+    @user = User.find(params[:id])
+    @social_post = @user.social_posts.build
+    respond_to do |format|
+
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace(
+          "#{helpers.dom_id(current_user)}_new_post_bar",
+          partial: "social_posts/form",
+          locals: {social_post: @social_post, user: @user}
+        )
+      }
+      format.html { redirect_to social_posts_url, notice: "Social post was unsuccessfully created." }
+    end
   end
 
   # POST /social_posts or /social_posts.json
   def create
-    @social_post = SocialPost.new(social_post_params)
+    if current_user
+      @social_post = SocialPost.new(social_post_params)
+      @user = User.find(@social_post.user_id)
+      @user.save
+      respond_to do |format|
+        if @social_post.save
 
-    respond_to do |format|
-      if @social_post.save
 
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.prepend(
-            "social_posts",
-            partial: "social_posts/social_post",
-            locals: {social_post: @social_post}
-          )
-        }
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.replace(
-            "#{helpers.dom_id(SocialPost.new)}_form",
-            partial: "social_posts/form",
-            locals: {social_post: SocialPost.new}
-          )
-        }
-        format.html { redirect_to social_posts_url, notice: "Post was successfully created!"}
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @social_post.errors, status: :unprocessable_entity }
+          format.html { redirect_to social_posts_url, notice: "Social post was successfully created." }
+          format.json { render :show, status: :created, location: @social_post }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @social_post.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      return respond_to do |format|
+        format.html { redirect_to social_posts_url}
       end
     end
   end
 
   # PATCH/PUT /social_posts/1 or /social_posts/1.json
   def update
-    if @social_post.user_id == current_user.id
-      respond_to do |format|
-        if @social_post.update(social_post_params)
-          format.html { redirect_to social_post_url(@social_post), notice: "Social post was successfully updated." }
-          format.json { render :show, status: :ok, location: @social_post }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @social_post.errors, status: :unprocessable_entity }
+    if current_user
+      if @social_post.user_id == current_user.id
+        respond_to do |format|
+          if @social_post.update(social_post_params)
+            format.html { redirect_to social_post_url(@social_post), notice: "Social post was successfully updated." }
+            format.json { render :show, status: :ok, location: @social_post }
+          else
+            format.html { render :edit, status: :unprocessable_entity }
+            format.json { render json: @social_post.errors, status: :unprocessable_entity }
+          end
         end
+      else
+        return respond_to do |format|
+          format.html { redirect_to social_posts_url}
+        end
+      end
+    else
+      return respond_to do |format|
+        format.html { redirect_to social_posts_url}
       end
     end
   end
 
   # DELETE /social_posts/1 or /social_posts/1.json
   def destroy
-    if @social_post.user_id == current_user.id
+    if @social_post.user_id == current_user.id || current_user.admin?
       @social_post.destroy
 
       respond_to do |format|

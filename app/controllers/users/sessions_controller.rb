@@ -14,9 +14,12 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+    # respond_to do |format|
+    #   format.html { redirect_to social_posts_url, notice: "Sign out successfull." }
+    # end
+  end
 
   # protected
 

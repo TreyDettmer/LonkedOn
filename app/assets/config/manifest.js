@@ -10,3 +10,6 @@
 //= link user-profile.css
 //= link social-posts.css
 //= link job-posts.css
+//= link sign-up.css
+//= link work-experience.css
+//= link education-experience.css

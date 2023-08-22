@@ -1,0 +1,84 @@
+@import "global-styles";
+
+.new_user {
+    background-color: $primary-color;
+    position: relative;
+    border-radius: $panel-border-radius;
+    width: 750px;
+    color: $white-font-color;
+    margin: 25px auto 0px auto;
+    padding: $horizontal-padding-value;
+
+    .log-in-prompt-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .title {
+        font-size: $h1-font-size;
+    }
+
+    .inline {
+        display: flex;
+        gap: 20px;
+    }
+
+    .label {
+        display: block;
+        color: $gray-font-color;
+        font-family: $body-font-family;
+        font-size: $body-font-size;
+    }
+
+    
+    .sub-label {
+        display: block;
+        color: $gray-font-color;
+        font-family: $body-font-family;
+        font-size: $body-font-size;
+    }
+
+    .field {
+        padding: 10px 0px;
+    }
+
+    .text-input {
+        color: $white-font-color;
+        font-family: $body-font-family;
+        background-color: $primary-color;
+        border-radius: 5px;
+        border: 1px solid $gray-font-color;
+        padding: 5px;
+    }
+
+    .headline-input {
+        width: 400px;
+    }
+
+    .sign-up-container
+    {
+        padding-top: $horizontal-padding-value;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+
+}
+
+.login-button, .sign-up-button {
+    background-color: $tertiary-color;
+    padding: 10px;
+    border: none;
+    margin: 0px;
+    border-radius: 20px;
+    font-size: $body-font-size;
+    font-weight: $bold-font-weight;
+    font-family: $body-font-family;
+    color: $dark-gray-font-color;
+    text-decoration: none;
+    cursor: pointer;
+}
+.login-button:hover, .sign-up-button:hover {
+    background-color: $tertiary-highlight-color;
+}

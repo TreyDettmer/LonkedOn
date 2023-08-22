@@ -1,11 +1,18 @@
+<%= stylesheet_link_tag "job-posts", "data-turbo-track": "reload" %>
 <%= turbo_frame_tag "selected-job-container" do %>
     <% if job_post != nil%>
         <div class="selected-job-container">
         <p class="title"><%=job_post.title%></p>
-        <p class=company-and-location><%=job_post.company.title%> &#x2022; <%=job_post.location%></p>
+        <div class="info-container">
+            <p class=company-and-location><%=job_post.company.title%> &#x2022; <%=job_post.location%></p>
+            <p class="creation-date-and-applicant-count"><%= time_ago_in_words(job_post.created_at.to_time)%> ago &#x2022; <%= job_post.applications.count %> applicants</p>
+        </div>
+
+        <% if current_user %>
+            <%= render "application_button", this_user: current_user, job_post: job_post %>
+        <% end %>
         <div class="about-section">
-            <p class="section-header">About the job</p>
-            <p class="section-content"><%=job_post.description%></p>
+            <p class="section-content"><%=job_post.description.html_safe%></p>
         </div>
         </div>
     <% end %>

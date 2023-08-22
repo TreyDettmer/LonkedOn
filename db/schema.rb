@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_15_202902) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_20_050236) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_202902) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "applications", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "job_post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_post_id"], name: "index_applications_on_job_post_id"
+    t.index ["user_id", "job_post_id"], name: "index_applications_on_user_id_and_job_post_id", unique: true
+    t.index ["user_id"], name: "index_applications_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string "text"
     t.string "user_id"
@@ -52,6 +62,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_202902) do
     t.string "location", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "education_experiences", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "school"
+    t.string "degree"
+    t.string "field_of_study"
+    t.date "start_date"
+    t.date "end_date"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_education_experiences_on_user_id"
   end
 
   create_table "followability_relationships", force: :cascade do |t|
@@ -114,15 +137,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_202902) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "headline"
-    t.string "username"
     t.integer "role"
     t.string "location", default: ""
+    t.string "first_name", default: ""
+    t.string "last_name", default: ""
+    t.text "about", default: ""
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "work_experiences", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "company_id", null: false
+    t.string "title"
+    t.string "location"
+    t.text "description"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_work_experiences_on_company_id"
+    t.index ["user_id"], name: "index_work_experiences_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "applications", "job_posts"
+  add_foreign_key "applications", "users"
+  add_foreign_key "education_experiences", "users"
   add_foreign_key "likes", "social_posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "work_experiences", "companies"
+  add_foreign_key "work_experiences", "users"
 end

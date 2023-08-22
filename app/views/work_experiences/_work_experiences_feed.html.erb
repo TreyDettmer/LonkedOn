@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "#{dom_id(user)}_work_experiences_frame" do %>
+    <% user.work_experiences.each_with_index do |work_experience, index| %>
+        <%= render work_experience %>
+    <% end %>
+<% end %>

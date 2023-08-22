@@ -43,7 +43,6 @@ class JobPostsController < ApplicationController
   def show
     @selected_job_post = JobPost.find(params[:id])
     @teststring = "show"
-    puts @selected_job_post.title
     respond_to do |format|
       format.turbo_stream {
         render turbo_stream: turbo_stream.replace(
@@ -57,7 +56,13 @@ class JobPostsController < ApplicationController
 
   # GET /job_posts/new
   def new
-    @job_post = JobPost.new
+    if current_user && current_user.admin?
+      @job_post = JobPost.new
+    else
+      return respond_to do |format|
+        format.html { redirect_to social_posts_url}
+      end
+    end
   end
 
   # GET /job_posts/1/edit
@@ -66,40 +71,57 @@ class JobPostsController < ApplicationController
 
   # POST /job_posts or /job_posts.json
   def create
-    @job_post = JobPost.new(job_post_params)
+    if current_user && current_user.admin?
+      @job_post = JobPost.new(job_post_params)
 
-    respond_to do |format|
-      if @job_post.save
-        format.html { redirect_to job_post_url(@job_post), notice: "Job post was successfully created." }
-        format.json { render :show, status: :created, location: @job_post }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @job_post.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @job_post.save
+          format.html { redirect_to job_post_url(@job_post), notice: "Job post was successfully created." }
+          format.json { render :show, status: :created, location: @job_post }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @job_post.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      return respond_to do |format|
+        format.html { redirect_to job_posts_url}
       end
     end
   end
 
   # PATCH/PUT /job_posts/1 or /job_posts/1.json
   def update
-    respond_to do |format|
-      if @job_post.update(job_post_params)
-        format.html { redirect_to job_post_url(@job_post), notice: "Job post was successfully updated." }
-        format.json { render :show, status: :ok, location: @job_post }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @job_post.errors, status: :unprocessable_entity }
+    if current_user && current_user.admin?
+      respond_to do |format|
+        if @job_post.update(job_post_params)
+          format.html { redirect_to job_post_url(@job_post), notice: "Job post was successfully updated." }
+          format.json { render :show, status: :ok, location: @job_post }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @job_post.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      return respond_to do |format|
+        format.html { redirect_to job_posts_url}
       end
     end
   end
 
   # DELETE /job_posts/1 or /job_posts/1.json
   def destroy
-    
-    @job_post.destroy
+    if current_user && current_user.admin?
+      @job_post.destroy
 
-    respond_to do |format|
-      format.html { redirect_to job_posts_url, notice: "Job post was successfully destroyed." }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to job_posts_url, notice: "Job post was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      return respond_to do |format|
+        format.html { redirect_to job_posts_url}
+      end
     end
   end
 

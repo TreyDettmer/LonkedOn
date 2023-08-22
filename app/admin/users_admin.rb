@@ -14,7 +14,8 @@ Trestle.resource(:users) do
   # Customize the form fields shown on the new/edit views.
   #
   form do |user|
-    text_field :username
+    text_field :first_name
+    text_field :last_name
     row { datetime_field :updated_at }
     row { datetime_field :created_at }
     row { select :role, options_for_select(User.roles.map {|key, value| [key.titleize, User.roles.key(value)]}, user.role) }

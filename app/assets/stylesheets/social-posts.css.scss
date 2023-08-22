@@ -66,6 +66,63 @@
     }
   }
 
+  #new_post_form {
+    width: 550px;
+    background-color: $primary-color;
+    border-radius: 10px;
+    position: relative;
+    padding: $horizontal-padding-value; 
+    .label {
+      display: block;
+      color: $gray-font-color;
+      font-family: $body-font-family;
+      font-size: $body-font-size;
+    }
+
+    .text-input, .date-input, select {
+        color: $white-font-color;
+        font-family: $body-font-family;
+        background-color: $primary-color;
+        border-radius: 5px;
+        border: 1px solid $gray-font-color;
+        padding: 5px;
+    }
+    .long {
+        width: 100%;
+    }
+    .submit-container
+    {
+        padding-top: $horizontal-padding-value;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .submit-button {
+        background-color: $tertiary-color;
+        padding: 10px;
+        border: none;
+        margin: 0px;
+        border-radius: 20px;
+        font-size: $body-font-size;
+        font-weight: $bold-font-weight;
+        color: $dark-gray-font-color;
+        cursor: pointer;
+
+    }
+    .submit-button:hover {
+        background-color: $tertiary-highlight-color;
+    }
+  }
+  #new_post_form::after {
+    display: block;
+    content: '';
+    height: 1px;
+    background: $dark-gray-font-color;
+    position: absolute;
+    bottom: -12px;
+    left: 10px;
+    right: 10px;
+  }
+
  .social_post {
     background-color: $primary-color;
     margin: 10px 5px;
@@ -74,6 +131,15 @@
     color: #ffffff;
     position: relative;
     border-radius: 10px;
+    .social_post_top_section {
+      display: flex;
+      justify-content: space-between;
+      form {
+        margin: 5px 10px;
+      }
+    }
+
+
 
     a,
     a:link,
@@ -126,7 +192,7 @@
     }
 
     .content { 
-      padding: 0px 10px;
+      padding: 5px 10px;
       p {
         margin: auto;
         font-size: $body-font-size;
@@ -262,9 +328,12 @@
         padding: 5px 0px;
         .header {
           display: flex;
-          flex-direction: column;
+          justify-content: space-between;
           padding: 0px 10px;
-
+          .header-text-container {
+            display: flex;
+            flex-direction: column;
+          }
           .username {
             color: $white-font-color;
             font-weight: $bold-font-weight;
@@ -286,6 +355,26 @@
       }
     }
  }
+
+ .delete-button {
+  padding: 10px;
+  border: none;
+  margin: 0px;
+  background-color: inherit;
+  border-radius: 20px;
+  font-size: $body-font-size;
+  font-weight: $bold-font-weight;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+
+}
+.delete-button:hover {
+}
+
+.delete-button .icon-container .icon::before {
+  color: $warning-highlight-color;
+}
 
  .modal {
     position: fixed;

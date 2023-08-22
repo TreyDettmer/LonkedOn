@@ -1,0 +1,49 @@
+<%= stylesheet_link_tag "user-profile", "data-turbo-track": "reload" %>
+<%= turbo_frame_tag "#{dom_id(user)}_new_education_experience_frame" do %>
+  <%= form_with(model: education_experience,data: { turbo: 'false' },class:"education-experience-form") do |form| %>
+    <p class="title"> New Experience </p> 
+    <% if education_experience.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(education_experience.errors.count, "error") %> prohibited this education_experience from being saved:</h2>
+
+        <ul>
+          <% education_experience.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= form.label :school, class:"label" %>
+      <%= form.text_field :school, class:"text-input long", value:education_experience.school %>
+    </div>
+    <div>
+      <%= form.label :field_of_study, class:"label" %>
+      <%= form.text_field :field_of_study, class:"text-input long", value:education_experience.field_of_study %>
+    </div>
+    <div>
+      <%= form.label :start_date, class:"label" %>
+      <%= form.date_field :start_date, class:"date-input", value:education_experience.start_date %>
+    </div>
+    <div>
+      <%= form.label :end_date, class:"label" %>
+      <%= form.date_field :end_date, class:"date-input", value:education_experience.end_date %>
+    </div>
+    <div>
+      <%= form.label :description, class:"label" %>
+      <%= form.text_area :description, class:"text-input long", value:education_experience.description %>
+    </div>
+    <div>
+      <%= form.text_field :user_id, type:"hidden", value:user.id %>
+    </div>
+
+    <div class="submit-container">
+      <%= form.submit class:"submit-button" %>
+    </div>
+    <% if education_experience.persisted? %>
+      <div class="submit-container">
+        <%= button_to "Delete Education Experience", education_experience_path(education_experience), class: "delete-button", method: :delete %>
+      </div>
+    <% end %>
+  <% end %>
+<%end%>

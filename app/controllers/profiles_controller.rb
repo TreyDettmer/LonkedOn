@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   end
 
   def users
-    query = User.ransack(username_cont: search_query)
+    query = User.ransack(first_name_cont: search_query)
 
     @users = query.result(distance: true)
   end

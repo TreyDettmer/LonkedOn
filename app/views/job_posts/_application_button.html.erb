@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "selected_job_post_application_button", class:"action-button-container" do %>
+    <% application = this_user.applications.find_by(job_post: job_post)%>
+    <% if application.nil? %>
+        <%= button_to "Apply", applications_path, params: {application: {job_post_id: job_post.id}}, class: "apply-button", method: :post %>
+    <% else %>
+        <%= button_to "Unapply", application_path(application), class: "apply-button unlike", method: :delete %>
+    <% end %>
+<% end %>

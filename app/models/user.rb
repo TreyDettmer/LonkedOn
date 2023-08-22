@@ -6,10 +6,17 @@ class User < ApplicationRecord
          followability
          has_many :social_posts, dependent: :destroy
          has_one_attached :avatar
+         has_one_attached :backdrop
          has_many :likes, dependent: :destroy
          has_many :comments, dependent: :destroy
+         has_many :work_experiences, dependent: :destroy
+         has_many :education_experiences, dependent: :destroy
+         has_many :applications, dependent: :destroy
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   def self.ransackable_attributes(auth_object = nil)
-    ["bio", "username"]
+    ["first_name", "last_name"]
   end
   def unfollow(user)
     followerable_relationships.where(followable_id: user.id).destroy_all

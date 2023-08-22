@@ -4,15 +4,24 @@
             <% commenter = User.find(comment.user_id)%>
             <%= link_to commenter, class:"image-container" do %>
                 <% if commenter.avatar.attached? %>
-                    <%= image_tag(user.avatar) %>
+                    <%= image_tag(commenter.avatar) %>
                 <% else %>
                     <%= image_tag("missing-avatar.png") %>
                 <% end %>
             <% end %>
             <div class="container">
                 <%= link_to commenter, class:"header" do %>
-                    <p class="username"><%= commenter.username %> </p>
-                    <p class="headline"><%= commenter.headline %> </p>
+                    <div class="header-text-container">
+                        <p class="username"><%= commenter.first_name %> <%= commenter.last_name %></p>
+                        <p class="headline"><%= commenter.headline %> </p>
+                    </div>
+                    <% if current_user && (commenter == current_user || current_user.admin?) %>
+                        <%= button_to comment_path(comment), data: { turbo: 'false' }, class: "delete-button", method: :delete do %>
+                            <div class="icon-container">
+                                <i class="fa-solid fa-trash-can icon"></i>
+                            </div>
+                        <% end %>
+                    <% end %>
                 <%end%>
                 <p class="body"><%= comment.text %></p>
             </div>

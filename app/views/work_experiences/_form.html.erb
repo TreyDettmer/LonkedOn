@@ -1,0 +1,54 @@
+<%= stylesheet_link_tag "user-profile", "data-turbo-track": "reload" %>
+<%= turbo_frame_tag "#{dom_id(user)}_new_work_experience_frame" do %>
+  <%= form_with(model: work_experience,data: { turbo: 'false' },class:"work-experience-form") do |form| %>
+    <p class="title"> New Experience </p> 
+    <% if work_experience.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(work_experience.errors.count, "error") %> prohibited this work_experience from being saved:</h2>
+
+        <ul>
+          <% work_experience.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= form.label :title, class:"label" %>
+      <%= form.text_field :title, class:"text-input long", value:work_experience.title %>
+    </div>
+    <div>
+      <%= form.label :location, class:"label" %>
+      <%= form.text_field :location, class:"text-input long", value:work_experience.location %>
+    </div>
+    <div>
+      <%= form.label :company_id, "Company", class:"label" %>
+      <%= form.collection_select :company_id, Company.all, :id, :title, prompt: true, value:work_experience.company %>
+    </div>
+    <div>
+      <%= form.label :start_date, class:"label" %>
+      <%= form.date_field :start_date, class:"date-input", value:work_experience.start_date %>
+    </div>
+    <div>
+      <%= form.label :end_date, class:"label" %>
+      <%= form.date_field :end_date, class:"date-input", value:work_experience.end_date %>
+    </div>
+    <div>
+      <%= form.label :description, class:"label" %>
+      <%= form.text_area :description, class:"text-input long", value:work_experience.description %>
+    </div>
+    <div>
+      <%= form.text_field :user_id, type:"hidden", value:user.id %>
+    </div>
+
+    <div class="submit-container">
+      <%= form.submit class:"submit-button" %>
+    </div>
+    <% if work_experience.persisted? %>
+      <div class="submit-container">
+        <%= button_to "Delete Work Experience", work_experience_path(work_experience), class: "delete-button", method: :delete %>
+      </div>
+    <% end %>
+    
+  <% end %>
+<%end%>

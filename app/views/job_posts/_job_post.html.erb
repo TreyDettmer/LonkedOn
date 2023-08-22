@@ -11,7 +11,7 @@
         <p class="title"><%= job_post.title %></p>
         <p class="company"><%= job_post.company.title %></p>
         <p class="location"><%= job_post.location %></p>
-        <p class="creation-date"><%= time_ago_in_words(job_post.created_at.to_time)%></p>
+        <p class="creation-date"><%= time_ago_in_words(job_post.created_at.to_time)%> ago</p>
       </div>  
     </div>
   <% end %>

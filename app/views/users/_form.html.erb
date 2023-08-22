@@ -1,39 +1,52 @@
 <%= stylesheet_link_tag "user-profile", "data-turbo-track": "reload" %>
-<%= form_with(model: current_user, id: "#{dom_id(current_user)}_form", class:"edit-form") do |form| %>
-  <% if current_user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(current_user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= turbo_frame_tag "#{dom_id(user)}_header_section_frame" do %>
+  <%= form_with(model: user, id: "#{dom_id(user)}_header_section_frame_form", class:"edit-form") do |form| %>
+    <% if current_user.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-        <% current_user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% user.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :avatar, class:"label" %>
+      <% if user.avatar.attached? %>
+          <div class="avatar-container">
+              <%= image_tag(user.avatar) %>
+          </div>
+          <%= form.file_field :avatar, value: user.avatar %>
+      <% else %>
+          <%= form.file_field :avatar %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :backdrop, class:"label" %>
+      <% if user.backdrop.attached? %>
+          <div class="backdrop-container">
+              <%= image_tag(user.backdrop) %>
+          </div>
+          <%= form.file_field :backdrop, value: user.backdrop %>
+      <% else %>
+          <%= form.file_field :backdrop %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :headline, class:"label" %>
+      <%= form.text_field :headline, class:"text-input long", value: user.headline %>
+    </div>
+    <div>
+      <%= form.label :location, class:"label" %>
+      <%= form.text_field :location, class:"text-input", value: user.location %>
+    </div>
+    <div class="submit-container">
+      <%= form.submit class:"submit-button" %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :avatar %>
-    <% if current_user.avatar.attached? %>
-        <div class="avatar-container">
-            <%= image_tag(current_user.avatar) %>
-        </div>
-        <%= form.file_field :avatar, value: current_user.avatar %>
-    <% else %>
-        <%= form.file_field :avatar %>
-    <% end %>
-    
-  </div>
-
-  <div>
-    <%= form.label :headline %>
-    <%= form.text_area :headline, class:"text-input", value: current_user.headline %>
-  </div>
-  <div>
-    <%= form.label :location %>
-    <%= form.text_field :location, class:"text-input", value: current_user.location %>
-  </div>
-  <div class="submit-container">
-    <%= form.submit class:"submit-button" %>
-  </div>
 <% end %>

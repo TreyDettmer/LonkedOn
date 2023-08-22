@@ -1,0 +1,70 @@
+@import "global-styles";
+.work-experience-container
+{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    position: relative;
+    padding: 12px 0px;
+
+    .company-image-container {
+        height: 100%;
+        img {
+            width: 50px;
+        }
+    }
+
+    .edit-button {
+        margin-left: auto;
+        margin-right: 0px;
+    }
+
+    .title-container {
+        display: flex;
+    }
+
+    .icon-container {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        position: relative;
+        i {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+    }
+    .icon-container:hover {
+        background-color: $dark-gray-font-color;
+    }
+
+    .title {
+        font-size: $base-font-size;
+    }
+    .company-name {
+        font-size: $body-font-size;
+    }
+    .duration {
+        font-size: $body-font-size;
+        color: $gray-font-color;
+    }
+    .location {
+        font-size: $body-font-size;
+        color: $gray-font-color;
+    }
+    .experience-description p {
+        font-size: $body-font-size;
+        padding-top: 10px;
+    }
+}
+.work-experience-container::after {
+    display: block;
+    content: '';
+    height: 1px;
+    background: $dark-gray-font-color;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

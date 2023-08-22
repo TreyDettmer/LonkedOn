@@ -1,0 +1,26 @@
+<%= stylesheet_link_tag "education-experience", "data-turbo-track": "reload" %>
+<%= turbo_frame_tag "#{dom_id(education_experience)}", class:"education-experience-container" do%>
+    <div class="company-image-container">
+        <%= image_tag("graduation-cap.jpg") %>
+    </div>
+    <div class="experience-info">
+        <div class="experience-header">
+            <div class="school-container">
+                <p class="school"><%= education_experience.school %></p>
+                <% if education_experience.user == current_user %>
+                    <%= link_to modify_education_experience_education_experience_path(education_experience) , data: {turbo_frame: "#{dom_id(education_experience.user)}_new_education_experience_frame", action: "replace",turbo_method: :get}, class: "education-experience-edit-button" do%>
+                        <div class="icon-container">
+                            <i class="fa-solid fa-pencil"></i>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
+            <p class="company-name"><%= education_experience.field_of_study %></p>
+            <p class="duration"><%= education_experience.start_date.strftime('%b %Y')%> - <%= education_experience.end_date.strftime('%b %Y')%></p>
+        </div>
+        <div class="experience-description">
+            <p><%= education_experience.description %></p>
+        </div>
+    </div>
+    
+<%end%>

@@ -1,0 +1,27 @@
+<%= turbo_frame_tag "#{dom_id(user)}_about_frame" do %>
+  <%= form_with(model: user,class:"about-form") do |form| %>
+    <% if user.errors.any? %>
+        <div style="color: red">
+        <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+            <% user.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+            <% end %>
+        </ul>
+        </div>
+    <% end %>
+
+
+
+    <div>
+        <%= form.label :about, class:"label" %>
+        <%= form.text_area :about, class:"text-input long", value: current_user.about %>
+    </div>
+
+    <div class="submit-container">
+        <%= form.submit class:"submit-button" %>
+    </div>
+    
+  <% end %>
+<%end%>

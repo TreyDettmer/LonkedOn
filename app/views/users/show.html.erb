@@ -1,40 +1,89 @@
 <%= stylesheet_link_tag "user-profile", "data-turbo-track": "reload" %>
 <%= turbo_frame_tag "modal" %>
 <div class=page-content>
-    <% if @user == current_user %>
-        <%= link_to edit_user_path(current_user), class:"edit-button" do %>
-            <div class="icon-container">
-                <i class="fa-solid fa-pencil"></i>
-            </div>
-        <% end %>
-    <% end %>
+
     <div class="header-section panel">
-        <% if @user.avatar.attached? %>
-            <div class="background"><%= image_tag(@user.avatar) %></div>
-        <% else %>
-            <div class="background"><%= image_tag("missing-avatar.png") %></div>
-        <% end %>
-        <div class="info">
+        <%= turbo_frame_tag "#{dom_id(@user)}_header_section_frame" do %>
+            <% if @user.backdrop.attached? %>
+                <div class="background"><%= image_tag(@user.backdrop) %></div>
+            <% else %>
+                <div class="background"><%= image_tag("missing-avatar.png") %></div>
+            <% end %>
+            <div class="info">
+                <% if @user == current_user %>
+                    <%= link_to update_user_profile_user_path(current_user), class:"profile-edit-button" do %>
+                        <div class="icon-container">
+                            <i class="fa-solid fa-pencil"></i>
+                        </div>
+                    <% end %>
+                <% end %>
+                <p class="username"><%= @user.first_name %> <%= @user.last_name %></p>
+                <p class="headline"> <%= @user.headline %> </p>
+                <p class="location"> <%= @user.location %> </p>
 
-            <p class="username"> <%= @user.username %> </p>
-            <p class="headline"> <%= @user.headline %> </p>
-            <p class="location"> <%= @user.location %> </p>
-
-            <p class="following"><%= @user.followers.count %> Followers </p>
-            <p class="following"><%= @user.following.count %> Following </p>
-            
-            <% if current_user %>
-                <%= render "follow_button", this_user: current_user, other_user: @user %>
-            <% end%>
-        </div>
-        <% if @user.avatar.attached? %>
-            <%= image_tag(@user.avatar,class:"profile-pic") %>
-        <% else %>
-            <%= image_tag("missing-avatar.png",class:"profile-pic") %>
+                <p class="following"><%= @user.followers.count %> Followers </p>
+                <p class="following"><%= @user.following.count %> Following </p>
+                
+                <% if current_user %>
+                    <%= render "follow_button", this_user: current_user, other_user: @user %>
+                <% end%>
+            </div>
+            <% if @user.avatar.attached? %>
+                <%= image_tag(@user.avatar,class:"profile-pic") %>
+            <% else %>
+                <%= image_tag("missing-avatar.png",class:"profile-pic") %>
+            <% end %>
         <% end %>
-        
     </div>
-    <div class="about-section panel">
-        <p class="section-title">About</p>
+    <div class="section panel">
+        <div class="section-header">
+            <p class="section-title">About</p>
+            <% if @user == current_user %>
+                <%= link_to update_about_section_user_path(@user), data: {turbo_frame: "#{dom_id(@user)}_about_frame", action: "replace",turbo_method: :get}, class: "add-button" do%>
+                    <div class="icon-container">
+                        <i class="fa-solid fa-pencil"></i>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+        <div class="section-content">
+            <%= turbo_frame_tag "#{dom_id(@user)}_about_frame" do %>
+                <p class="about-content"><%= @user.about %></p>
+            <% end %> 
+        </div>
+    </div>
+    <div class="section panel">
+        <div class="section-header">
+            <p class="section-title">Experience</p>
+            <% if @user == current_user %>
+                <%= link_to build_a_new_work_experience_user_path(@user) , data: {turbo_frame: "#{dom_id(@user)}_new_work_experience_frame", action: "replace",turbo_method: :get}, class: "add-button" do%>
+                    <div class="icon-container">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+
+        <div class="section-content">
+            <%= turbo_frame_tag "#{dom_id(@user)}_new_work_experience_frame"%>
+            <%= render "work_experiences/work_experiences_feed", user: @user %>
+        </div>
+    </div>
+    <div class="section panel">
+        <div class="section-header">
+            <p class="section-title">Education</p>
+            <% if @user == current_user %>
+                <%= link_to build_a_new_education_experience_user_path(@user) , data: {turbo_frame: "#{dom_id(@user)}_new_education_experience_frame", action: "replace",turbo_method: :get}, class: "add-button" do%>
+                    <div class="icon-container">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+
+        <div class="section-content">
+            <%= turbo_frame_tag "#{dom_id(@user)}_new_education_experience_frame"%>
+            <%= render "education_experiences/education_experiences_feed", user: @user %>
+        </div>
     </div>
 </div>

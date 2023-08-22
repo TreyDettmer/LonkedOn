@@ -9,28 +9,49 @@
     position: relative;
 }
 
-.edit-button {
+.profile-edit-button {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: $horizontal-padding-value;
+    right: $horizontal-padding-value;
+}
+
+.work-experience-edit-button {
     position: absolute;
     width: 35px;
     height: 35px;
     top: 0px;
-    right: $horizontal-padding-value;
+    right: 0px;
+}
 
-    .icon-container {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        position: relative;
-        i {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-        }
+.education-experience-edit-button {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 0px;
+    right: 0px;
+}
+
+.icon-container {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: relative;
+    i {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
     }
-    .icon-container:hover {
-        background-color: $dark-gray-font-color;
-    }
+}
+.icon-container:hover {
+    background-color: $dark-gray-font-color;
+}
+
+.about-content {
+    color: $white-font-color;
+    font-size: $body-font-size;
 }
 
 .header-section {
@@ -44,13 +65,13 @@
     .background {
         width: 100%;
         height: 230px;
-        object-fit: cover;
+        object-fit: contain;
         background-color: $primary-color;
         border-radius: $panel-border-radius $panel-border-radius 0px 0px;
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: $panel-border-radius $panel-border-radius 0px 0px;
         }
     }
@@ -122,35 +143,41 @@
     }
 }
 
-.edit-form {
-    background-color: $primary-color;
-    position: relative;
-    border-radius: $panel-border-radius;
-    width: 750px;
-    color: $white-font-color;
-    margin: 25px auto 0px auto;
-    padding: $horizontal-padding-value;
-
+form {
     .avatar-container {
         img {
             width: 100px;
         }
     }
+    .backdrop-container {
+        width: 200px;
+        height: 90px;
+        object-fit: contain;
 
-    label {
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .label {
         display: block;
         color: $gray-font-color;
         font-family: $body-font-family;
         font-size: $body-font-size;
     }
 
-    .text-input {
+    .text-input, .date-input, select {
         color: $white-font-color;
         font-family: $body-font-family;
         background-color: $primary-color;
         border-radius: 5px;
         border: 1px solid $gray-font-color;
         padding: 5px;
+    }
+    .long {
+        width: 100%;
     }
     .submit-container
     {
@@ -175,6 +202,34 @@
     }
 }
 
+.edit-form{
+    background-color: $primary-color;
+    position: relative;
+    border-radius: $panel-border-radius;
+    width: 750px;
+    color: $white-font-color;
+    margin: 25px auto 0px auto;
+    padding: $horizontal-padding-value; 
+}
+
+.work-experience-form {
+    width: 100%;
+    background-color: $primary-color;
+    position: relative;
+    color: $white-font-color;
+    margin: 25px auto 0px auto;
+    padding: $horizontal-padding-value; 
+}
+
+.section-header {
+    display: flex;
+}
+
+.add-button {
+    margin-left: auto;
+    margin-right: 0px;
+}
+
 .section-title {
     font-size: $base-font-size;
     font-weight: $bold-font-weight;
@@ -182,9 +237,25 @@
     padding:  0px;
 }
 
-.about-section {
+.section {
     width: 750px;
-    height: 200px;
     margin: 5px auto;
     padding: $horizontal-padding-value;
+}
+
+.delete-button {
+    background-color: $warning-color;
+    padding: 10px;
+    border: none;
+    margin: 0px;
+    border-radius: 20px;
+    font-size: $body-font-size;
+    font-weight: $bold-font-weight;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+.delete-button:hover {
+    background-color: $warning-highlight-color;
 }

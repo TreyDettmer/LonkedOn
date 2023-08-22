@@ -1,0 +1,31 @@
+<%= stylesheet_link_tag "work-experience", "data-turbo-track": "reload" %>
+<%= turbo_frame_tag "#{dom_id(work_experience)}", class:"work-experience-container" do%>
+    <div class="company-image-container">
+        <% if work_experience.company.image.attached? %>
+            <%= image_tag(work_experience.company.image) %>
+        <% else%>
+            <%= image_tag("missing-avatar.png") %>
+        <% end %>
+    </div>
+    <div class="experience-info">
+        <div class="experience-header">
+            <div class="title-container">
+                <p class="title"><%= work_experience.title %></p>
+                <% if work_experience.user == current_user %>
+                    <%= link_to modify_work_experience_work_experience_path(work_experience) , data: {turbo_frame: "#{dom_id(work_experience.user)}_new_work_experience_frame", action: "replace",turbo_method: :get}, class: "work-experience-edit-button" do%>
+                        <div class="icon-container">
+                            <i class="fa-solid fa-pencil"></i>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
+            <p class="company-name"><%= work_experience.company.title %></p>
+            <p class="duration"><%= work_experience.start_date.strftime('%b %Y')%> - <%= work_experience.end_date.strftime('%b %Y')%></p>
+            <p class="location"><%= work_experience.location %></p>
+        </div>
+        <div class="experience-description">
+            <p><%= work_experience.description %></p>
+        </div>
+    </div>
+    
+<%end%>

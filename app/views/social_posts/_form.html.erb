@@ -1,27 +1,30 @@
-<%= form_with(model: social_post, id: "#{dom_id(social_post)}_form") do |form| %>
-  <% if social_post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(social_post.errors.count, "error") %> prohibited this social_post from being saved:</h2>
+<%= stylesheet_link_tag "social-posts", "data-turbo-track": "reload" %>
+<%= turbo_frame_tag "#{dom_id(user)}_new_post_bar" do %>
+  <%= form_with(model: social_post,data: { turbo: 'false' }, id: "new_post_form") do |form| %>
+    <% if social_post.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(social_post.errors.count, "error") %> prohibited this social_post from being saved:</h2>
 
-      <ul>
-        <% social_post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% social_post.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :content, class:"label" %>
+      <%= form.text_area :content, class:"text-input long" %>
+    </div>
+
+    <div>
+      <%= form.label :image, class:"label" %>
+      <%= form.file_field :image %>
+    </div>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <div class="submit-container">
+      <%= form.submit class:"submit-button" %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content, placeholder: "Start a post" %>
-  </div>
-
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.file_field :image %>
-  </div>
-  <%= form.hidden_field :user_id, value: current_user.id %>
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

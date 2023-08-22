@@ -3,7 +3,9 @@
     width: 100%;
     height: 50px;
     background-color: $primary-color;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 10;
     
 }
 
@@ -16,19 +18,23 @@
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 10;
 }
  
 .navbar ul {
   list-style-type: none;
   display: flex;
-  height: 100%;
+  height: inherit;
   justify-content: center;
+  background-color: $primary-color;
   align-items: center;
+  
   li {
     padding: 0px 10px;
-    height: 100%;
+    height: inherit;
     display: flex;
     align-items: center;
+    
     .signup-link {
       height: 80%;
       display: flex;
@@ -64,7 +70,7 @@
       }
     }
     a {
-      color: white;
+
       height: 100%;
       text-decoration: none;
       display: flex;
@@ -77,10 +83,38 @@
         padding: 15px 0px 8px 0px;
       }
 
+      .icon::before {
+        color: $gray-font-color;
+      }
+
       img {
         width: 25px;
         border-radius: 50%;
       }
+      .main {
+        border-radius: 0%;
+        width: 35px;
+      }
+
+      p {
+        color: $gray-font-color;
+      }
+    }
+    .active {
+      color: $white-font-color;
+    }
+    .active p {
+      color: $white-font-color;
+    }
+    .active::before {
+      color: $white-font-color;
+    }
+
+    .active .icon::before {
+      color: $white-font-color;
+    }
+    .search-bar {
+      height: inherit;
     }
     .search-form {
       height: 100%;
