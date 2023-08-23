@@ -1,6 +1,17 @@
-<div>
-    <h2><%= link_to "#{user.first_name} #{user.last_name}", user%><h2>
-    <% if user.avatar.attached? %>
-        <%= image_tag(user.avatar, size: "50") %>
+<div class="user-container">
+    <%= link_to user, class:"user" do %>
+        
+        <% if user.avatar.attached? %>
+            <%= image_tag(user.avatar) %>
+        <% else %>
+            <%= image_tag("missing-avatar.png") %>
+        <% end %>
+        <div class="info-container">
+            <p class="name"><%= "#{user.first_name} #{user.last_name}"%><p>
+            <p class="headline"><%= user.headline %><p>
+            <p class="location"><%= user.location %><p>
+        </div>
+        
     <% end %>
+
 </div>

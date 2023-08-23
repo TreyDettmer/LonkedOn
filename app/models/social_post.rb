@@ -5,7 +5,7 @@ class SocialPost < ApplicationRecord
 
     has_many :likes, dependent: :destroy
     has_many :comments, dependent: :destroy
-
+    validates_length_of :content, :minimum => 1
     before_create :randomize_id
 
     private

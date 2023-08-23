@@ -48,7 +48,7 @@
         </div>
         <div class="section-content">
             <%= turbo_frame_tag "#{dom_id(@user)}_about_frame" do %>
-                <p class="about-content"><%= @user.about %></p>
+                <%= simple_format(@user.about,class:"about-content") %>
             <% end %> 
         </div>
     </div>

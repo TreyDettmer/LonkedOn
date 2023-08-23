@@ -2,7 +2,30 @@
 
 
 
- 
+ .welcome {
+    position: absolute;
+    width: 300px;
+    left: $horizontal-padding-value;
+    background-color: $primary-color;
+    top: 85px;
+    border-radius: $panel-border-radius;
+    padding: $horizontal-padding-value 10px;
+    p {
+      font-size: $body-font-size;
+      a {
+        text-decoration: none;
+        color: $tertiary-color;
+      }
+    }
+ }
+
+ .trey-image {
+    float: left;
+    width: 75px;
+    height: 75px;
+    padding: 5px;
+    border-radius: 50%;
+ }
 
  .social_posts_container {
     background-color: $secondary-color;

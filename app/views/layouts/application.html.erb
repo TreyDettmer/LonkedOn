@@ -12,7 +12,7 @@
 
   <body>
     <%= render 'layouts/navbar' %>
-    <% if current_user && current_user.admin? %>
+    <% if current_user %>
       <p class="notice"><%= notice %></p>
     <% end %>
     <p class="alert"><%= alert %></p>

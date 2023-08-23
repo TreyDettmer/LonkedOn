@@ -16,7 +16,7 @@
 
     <div>
         <%= form.label :about, class:"label" %>
-        <%= form.text_area :about, class:"text-input long", value: current_user.about %>
+        <%= form.text_area :about, class:"text-input long", maxlength: 500, value: current_user.about %>
     </div>
 
     <div class="submit-container">

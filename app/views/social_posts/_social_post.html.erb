@@ -20,7 +20,7 @@
         <% end %>
       <% end %>
       <% if social_post.user == current_user || current_user.admin? %>
-        <%= button_to social_post_path(social_post), data: { turbo: 'false' }, class: "delete-button", method: :delete do %>
+        <%= button_to social_post_path(social_post), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this post?",turbo_frame: "_top"}, method: :delete, class: "delete-button" do %>
           <div class="icon-container">
               <i class="fa-solid fa-trash-can icon"></i>
           </div>
@@ -28,7 +28,7 @@
       <% end %>
     </div>
     <div class="content">
-      <p><%= social_post.content %></p>
+      <%= simple_format(social_post.content) %>
       <% if social_post.image.attached? %>
         <%= image_tag(social_post.image) %>
       <% end%>

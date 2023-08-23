@@ -15,11 +15,11 @@
     <% end %>
     <div>
       <%= form.label :school, class:"label" %>
-      <%= form.text_field :school, class:"text-input long", value:education_experience.school %>
+      <%= form.text_field :school, class:"text-input long",maxlength: 40, value:education_experience.school %>
     </div>
     <div>
       <%= form.label :field_of_study, class:"label" %>
-      <%= form.text_field :field_of_study, class:"text-input long", value:education_experience.field_of_study %>
+      <%= form.text_field :field_of_study, class:"text-input long", maxlength: 40, value:education_experience.field_of_study %>
     </div>
     <div>
       <%= form.label :start_date, class:"label" %>
@@ -31,7 +31,7 @@
     </div>
     <div>
       <%= form.label :description, class:"label" %>
-      <%= form.text_area :description, class:"text-input long", value:education_experience.description %>
+      <%= form.text_area :description, class:"text-input long", maxlength: 600, value:education_experience.description %>
     </div>
     <div>
       <%= form.text_field :user_id, type:"hidden", value:user.id %>

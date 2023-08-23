@@ -8,9 +8,9 @@
             <%end%>
         </li>
         <li class="search-bar">
-            <%= form_with url: profiles_index_path, class:"search-form", method: :get do |form| %>
+            <%= search_form_for(@q, url: profiles_index_path, class:"search-form", method: :get) do |form|%>
                 <i class="fa-solid fa-magnifying-glass fa-sm icon"></i>
-                <%= form.search_field :query, value: params[:query], placeholder: "Search people"%>
+                <%= form.search_field :full_name_cont, placeholder: "Search people"%>
             <% end %>
         </li>
         <li>

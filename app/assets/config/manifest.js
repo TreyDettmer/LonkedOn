@@ -13,3 +13,4 @@
 //= link sign-up.css
 //= link work-experience.css
 //= link education-experience.css
+//= link profiles.css

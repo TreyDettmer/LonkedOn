@@ -39,11 +39,11 @@
 
     <div>
       <%= form.label :headline, class:"label" %>
-      <%= form.text_field :headline, class:"text-input long", value: user.headline %>
+      <%= form.text_field :headline, class:"text-input long", maxlength: 70, value: user.headline %>
     </div>
     <div>
       <%= form.label :location, class:"label" %>
-      <%= form.text_field :location, class:"text-input", value: user.location %>
+      <%= form.text_field :location, class:"text-input", maxlength: 35, value: user.location %>
     </div>
     <div class="submit-container">
       <%= form.submit class:"submit-button" %>

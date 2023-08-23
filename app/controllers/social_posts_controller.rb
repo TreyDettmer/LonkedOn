@@ -149,11 +149,19 @@ class SocialPostsController < ApplicationController
   def destroy
     if @social_post.user_id == current_user.id || current_user.admin?
       @social_post.destroy
-
+      #broadcast_to_all("social_post_deleted", @social_post.id)
+        
       respond_to do |format|
-        format.html { redirect_to social_posts_url, notice: "Social post was successfully destroyed." }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.remove(
+            "#{helpers.dom_id(@social_post)}"
+          )
+        }
+        format.html { redirect_to job_posts_url, notice: "Social post was successfully destroyed." }
         format.json { head :no_content }
       end
+      
+      #redirect_to social_posts_path, notice: "Social post was successfully deleted."
     end
   end
 
@@ -167,5 +175,10 @@ class SocialPostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def social_post_params
       params.require(:social_post).permit(:title, :content, :image, :user_id)
+    end
+
+    def broadcast_to_all(action, record_id)
+      turbo_stream.append("social_posts", render(partial: "empty_social_post", locals: { social_post: SocialPost.new }))
+      turbo_stream.remove("social_post_#{record_id}")
     end
 end

@@ -15,7 +15,7 @@
 
     <div>
       <%= form.label :content, class:"label" %>
-      <%= form.text_area :content, class:"text-input long" %>
+      <%= form.text_area :content,minlength:1,maxlength: 700, class:"text-input long",:required => true,value:"" %>
     </div>
 
     <div>

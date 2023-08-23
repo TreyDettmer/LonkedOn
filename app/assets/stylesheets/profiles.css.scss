@@ -1,0 +1,45 @@
+@import "global-styles";
+.container {
+    width: 550px;
+    background-color: $secondary-color;
+    margin: $horizontal-padding-value auto;
+}
+
+h2 {
+    margin: auto;
+    text-align: center;
+}
+
+.user-container {
+    background-color: $primary-color;
+    border-radius: 10px;
+    position: relative;
+    padding: 10px;
+    margin-bottom: $horizontal-padding-value;
+    .user {
+        display: flex;
+        gap: 10px;
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        text-decoration: none;
+        .info-container {
+            
+            .name {
+                font-size: $base-font-size;
+                text-decoration: none;
+            }
+            .headline {
+                font-size: $body-font-size;
+                text-decoration: none;
+            }
+            .location {
+                font-size: $body-font-size;
+                color: $gray-font-color;
+                text-decoration: none; 
+            }
+        }
+    }
+}

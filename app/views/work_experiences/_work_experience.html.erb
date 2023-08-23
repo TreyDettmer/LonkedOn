@@ -24,7 +24,7 @@
             <p class="location"><%= work_experience.location %></p>
         </div>
         <div class="experience-description">
-            <p><%= work_experience.description %></p>
+            <%= simple_format(work_experience.description) %>
         </div>
     </div>
     

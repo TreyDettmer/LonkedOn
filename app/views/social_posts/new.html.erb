@@ -1,17 +1,1 @@
-<%= turbo_frame_tag "modal" do %>
-
-  <div class="modal">
-    <h1>New social post</h1>
-
-    <%= render "form", social_post: @social_post %>
-
-    <br>
-
-    <div>
-      <%= link_to "Cancel", "#", data: {
-        controller: "modals",
-        actions: "modals#close"
-      }, class: "cancel-button" %>
-    </div>
-  </div>
-<% end %>
+<%= render "form", social_post: @social_post, user: current_user %>

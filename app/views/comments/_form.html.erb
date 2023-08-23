@@ -20,7 +20,7 @@
       <% else %>
         <%= image_tag("missing-avatar.png") %>
       <% end %>
-      <%= form.text_field :text, placeholder:"Start a comment" %>
+      <%= form.text_field :text, maxlength: 300, placeholder:"Start a comment" %>
     </div>
 
     <div>
