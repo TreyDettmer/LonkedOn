@@ -2,11 +2,13 @@ databases:
   - name: lonkedon
     databaseName: lonkedon
     user: lonkedon
+    plan: free
 
 services:
   - type: web
     name: lonkedon
     runtime: ruby
+    plan: free
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
