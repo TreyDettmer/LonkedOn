@@ -23,6 +23,8 @@ gem 'pagy'
 gem 'solargraph', '~> 0.49.0'
 gem "font-awesome-sass", "~> 6.4.2"
 gem 'sass-rails'
+gem "aws-sdk-s3", require: false
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
