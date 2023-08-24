@@ -32,9 +32,9 @@
             <li>
                 <%= link_to current_user,class:"#{is_active('users/'+current_user.id.to_s)}" do %>
                     <% if current_user.avatar.attached? %>
-                        <%= image_tag(current_user.avatar)%>
+                        <%= image_tag(current_user.avatar, class:"profile-pic")%>
                     <% else %>
-                        <%= image_tag("missing-avatar.png")%>
+                        <%= image_tag("missing-avatar.png", class:"profile-pic")%>
                     <% end %>
                     <p>Me</p>
                 <%end%>
