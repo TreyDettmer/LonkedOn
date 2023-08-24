@@ -1,6 +1,6 @@
 class SocialPostsController < ApplicationController
   before_action :set_social_post, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :show_comments]
   helper_method :time_since_creation
   include Pagy::Backend
 
