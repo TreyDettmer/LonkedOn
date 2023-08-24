@@ -3,5 +3,7 @@
     <p> <%= company.location %> </p>
     <% if company.image.attached?%>
         <%= image_tag(company.image,size: '50') %>
+    <% else %>
+        <%= image_tag("missing-avatar.png",size: '50') %>
     <% end %>
 </div>

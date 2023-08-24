@@ -33,8 +33,10 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
-    respond_to do |format|
-      format.html { redirect_to job_posts_url}
+    if !current_user || (current_user && !current_user.admin?)
+      respond_to do |format|
+        format.html { redirect_to job_posts_url}
+      end
     end
   end
 
