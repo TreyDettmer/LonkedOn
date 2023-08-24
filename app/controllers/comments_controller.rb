@@ -82,6 +82,7 @@ class CommentsController < ApplicationController
       end
     else
       puts "you don't have permission to delete this comment"
+      puts "Comment User_ID: #{@comment.user_id}    Current_User_ID: #{current_user.id}"
     end
   end
 
