@@ -9,16 +9,19 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+    respond_to do |format|
+      format.html { redirect_to social_posts_url, notice: "Log in successful" }
+    end
+  end
 
   # DELETE /resource/sign_out
   def destroy
     super
-    # respond_to do |format|
-    #   format.html { redirect_to social_posts_url, notice: "Sign out successfull." }
-    # end
+    respond_to do |format|
+      format.html { redirect_to social_posts_url, notice: "Sign out successful" }
+    end
   end
 
   # protected
