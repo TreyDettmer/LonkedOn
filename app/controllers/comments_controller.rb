@@ -67,7 +67,7 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
-    if @comment.user_id == current_user.id || current_user.admin?
+    if (@comment.user_id == current_user.id) || current_user.admin?
       
 
       respond_to do |format|
@@ -80,6 +80,8 @@ class CommentsController < ApplicationController
         end
 
       end
+    else
+      puts "you don't have permission to delete this comment"
     end
   end
 
