@@ -1,6 +1,6 @@
 <%= turbo_stream.append :social_posts do %>
     <% @social_posts.each do |social_post| %>
-        <% if user_signed_in? %>
+        <% if current_user && user_signed_in? %>
             <% if current_user.following?(social_post.user) || current_user == social_post.user %>
                 <%= render social_post %>
             <% end %>
