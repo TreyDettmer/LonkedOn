@@ -5,9 +5,62 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    redirect_to new_user_session_path and return
+    super
+  end
+
+
+
+=begin
+<p class="title">Sign Up</p>
+  <div class="inline">
+    <div class="field">
+      <%= f.label :first_name, class:"label" %>
+      <%= f.text_field :first_name, class:"text-input" %>
+    </div>
+    <div class="field">
+      <%= f.label :last_name, class:"label" %>
+      <%= f.text_field :last_name, class:"text-input" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, class:"label" %>
+    <%= f.email_field :email, class:"text-input", autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :headline, class:"label" %>
+    <%= f.text_field :headline, class:"text-input headline-input" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :avatar, class:"label" %>
+    <%= f.file_field :avatar %>
+  </div>
+
+
+
+  <div class="field">
+    <%= f.label :password, class:"label" %>
+
+    <%= f.password_field :password, class:"text-input", autocomplete: "new-password" %>
+    <% if @minimum_password_length %>
+      <p class="sub-label">(<%= @minimum_password_length %> characters minimum)</p>
+    <% end %><br />
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, class:"label" %>
+    <%= f.password_field :password_confirmation, class:"text-input", autocomplete: "new-password" %>
+  </div>
+
+
+  <div class="sign-up-container">
+    <%= f.submit class:"sign-up-button" %>
+  </div>
+=end
 
   # POST /resource
   # def create
