@@ -20,7 +20,7 @@ class SocialPostsController < ApplicationController
   # GET /social_posts or /social_posts.json
   def index
     @social_posts = SocialPost.order(:created_at => :desc)
-    @pagy, @social_posts = pagy_countless(@social_posts, items: 3)
+    @pagy, @social_posts = pagy_countless(@social_posts, items: 10)
   end
 
   def start_a_comment

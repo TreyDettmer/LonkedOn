@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :applications, only: [:create, :destroy]
   get 'pages/media'
   devise_for :users, controllers: {
+    sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
 

@@ -19,7 +19,7 @@ class JobPostsController < ApplicationController
   # GET /job_posts or /job_posts.json
   def index
     @job_posts = JobPost.order(:created_at => :desc)
-    @pagy, @job_posts = pagy_countless(@job_posts, items: 3)
+    @pagy, @job_posts = pagy_countless(@job_posts, items: 10)
     @teststring = "index"
   end
 
