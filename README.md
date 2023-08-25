@@ -3,6 +3,7 @@
 ## Watch The Video Demo
 [![Video Demo](screenshots/LonkedOn-video-screenshot.JPG)](https://www.youtube.com/watch?v=40PpYuyoNvs)
 ## Try It Out https://lonkedon.onrender.com/social_posts
+### :hourglass_flowing_sand: The application can take a while to load at first because the render.com hosting service makes free tier websites sleep when there is no activity for a while.
 ### :warning: After November 20th, 2023 the application will most likely no longer be accessible because the free tier of the database being used to store the application's data will have expired.
 
 
